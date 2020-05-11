@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Card, ListGroup } from "react-bootstrap";
 
-const db = testdb.all();
+
 
 class Post extends Component {
   render() {
