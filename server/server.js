@@ -8,5 +8,5 @@ app.use(express.json());
 app.use("/api/posts", apiRouter);
 
 app.listen(process.env.PORT || "5000", () => {
-  console.log(`Geia soy ${process.env.PORT || "5000"}`);
+    console.log(`Geia soy ${process.env.PORT || "5000"}`);
 });
