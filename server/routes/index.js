@@ -7,8 +7,8 @@ router.get("/", async (req, res, next) => {
     
     try{
         let Results = await db.all();
-        let Arraypap= Array.from(Results);
-        res.json(Arraypap);
+        let postArray= Array.from(Results);
+        res.json(postArray);
 
     }catch(e){
         console.log(e);

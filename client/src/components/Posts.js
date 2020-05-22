@@ -26,8 +26,6 @@ class Posts extends Component {
           </Row>
           <Row className="d-flex flex-column">
             <Post />
-            <Post />
-            <Post />
           </Row>
         </CenterContent>
       </Container>
