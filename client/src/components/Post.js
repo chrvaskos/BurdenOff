@@ -22,15 +22,14 @@ class Post extends Component {
     return (
       <div>
         {this.state.postArray.map((post) => (
-          <Card key={post.idPost} className="my-3 mx-1">
+          <Card key={post.id} className="my-3 mx-1">
             <Card.Header>{post.title}</Card.Header>
             <ListGroup variant="flush">
               <ListGroup.Item variant="light" className="text-dark">
-                Problem: {post.postText}
+                Problem: {post.content}
               </ListGroup.Item>
               <ListGroup.Item variant="success">
-                Solution: Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Sint nihil quam vero saepe vel
+                Solution: {post.solution}
               </ListGroup.Item>
             </ListGroup>
           </Card>
