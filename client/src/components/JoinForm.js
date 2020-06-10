@@ -6,14 +6,17 @@ import { Container, Form, Button, Row, InputGroup } from "react-bootstrap";
 const initialFormData = Object.freeze({
   username: "",
   email:"",
-  password: ""
+  password: "",
+  role:"1"
   
 });
+
 
 
 // class JoinForm extends Component {
 //   render() {
   const JoinForm = () => {
+    
     
     const [formData, updateFormData] = React.useState(initialFormData);
     const handleChange = (e) => {
@@ -25,8 +28,18 @@ const initialFormData = Object.freeze({
       });
     };
     const handleSubmit = (e) => {
-      e.preventDefault()
+      
+      
+      // fetch('/newUser', {
+      //   method: 'POST',
+      //   // We convert the React state to JSON and send it as the POST body
+      //   body: JSON.stringify(this.formData)
+      // }).then(function(response) {
+      //   console.log(response)
+      //   return response.json();
+      // });
       console.log(formData);
+      e.preventDefault()
       // ... submit to API or something
     };
     
@@ -36,8 +49,8 @@ const initialFormData = Object.freeze({
         <Container className="d-flex flex-column mt-2 mb-5">
           <p className="align-self-center mb-2">Join Burden Off</p>
           <h1 className="align-self-center mb-5">Create your account</h1>
-          <Form className="align-self-center" style={{ width: 450 }}>
-            <Form.Group controlId="validationCustomUsername">
+          <Form className="align-self-center"  style={{ width: 450 }}>
+            <Form.Group  controlId="validationCustomUsername">
               <Form.Label>Username</Form.Label>
               <InputGroup>
                 <Form.Control
