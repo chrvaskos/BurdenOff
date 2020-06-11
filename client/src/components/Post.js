@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Card, ListGroup } from "react-bootstrap";
 
+
+
 class Post extends Component {
   constructor() {
     super();
@@ -13,14 +15,15 @@ class Post extends Component {
     fetch("/api/posts")
       .then((res) => res.json())
       .then((postArray) =>
-        this.setState({ postArray }, () =>
-          console.log("Results fetched..", postArray)
-        )
+        this.setState({ postArray })
+        
       );
   }
+  
   render() {
     return (
       <div>
+        
         {this.state.postArray.map((post) => (
           <Card key={post.id} className="my-3 mx-1">
             <Card.Header>{post.title}</Card.Header>

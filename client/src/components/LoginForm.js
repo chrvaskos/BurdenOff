@@ -1,8 +1,67 @@
 import React, { Component } from "react";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import UserProfile from '../util/UserProfile';
 
 class LoginForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userArray: [],
+      passwordArray: []
+    };
+
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    
+  }
+  handleUsernameChange(e) {
+    this.setState({ username: e.target.value });
+  }
+
+  handlePasswordChange(e) {
+    this.setState({ password: e.target.value });
+  }
+  handleSubmit(e) {
+    fetch("/api/users")
+      .then((res) => res.json())
+      .then((userArray) => this.setState({ userArray }));
+    for (let i = 0; i < this.state.userArray.length; i++) {
+      if (this.state.username == this.state.userArray[i].username) {
+        this.state.passwordArray[0] = this.state.password;
+        this.state.passwordArray[1] = this.state.userArray[i].password;
+        fetch("/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // We convert the React state to JSON and send it as the POST body
+          body: JSON.stringify(this.state.passwordArray),
+        })
+          .then(function (res) {
+            return res.text();
+          })
+          .then(function (matched){
+            
+            if (matched == "Success") {
+              console.log("We in");
+              UserProfile.setName(this.state.userArray[i].username);
+              UserProfile.setRole(this.state.userArray[i].role);
+                           
+
+            } else console.log("We out");
+          }.bind(this));
+      }
+
+      // if res == true, password matched
+      // else wrong password
+    }
+
+    e.preventDefault();
+    // ... submit to API o  r something
+  }
+
   render() {
     return (
       <Row className="py-5">
@@ -11,20 +70,36 @@ class LoginForm extends Component {
           <Form className="align-self-center" style={{ width: 300 }}>
             <Form.Group controlId="validationCustomUsername">
               <Form.Label>Username</Form.Label>
-              <Form.Control type="text" placeholder="Username" />
+              <Form.Control
+                type="text"
+                onChange={this.handleUsernameChange}
+                placeholder="Username"
+              />
             </Form.Group>
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Control
+                type="password"
+                onChange={this.handlePasswordChange}
+                placeholder="Password"
+              />
             </Form.Group>
             <Form.Group controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="Remember me" />
             </Form.Group>
-            <Button variant="primary" type="submit" style={{ width: 300 }}>
+            <Button
+              variant="primary"
+              onClick={this.handleSubmit}
+              type="submit"
+              style={{ width: 300 }}
+            >
               Login
             </Button>
           </Form>
-          <Col className="align-self-center d-inline border my-5" style={{ width: 300 }}>
+          <Col
+            className="align-self-center d-inline border my-5"
+            style={{ width: 300 }}
+          >
             <p className="text-center pt-3">
               New to Burden Off? <br />
               <Link to="/join">Create an account now!</Link>
