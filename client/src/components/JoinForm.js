@@ -3,58 +3,66 @@ import { Container, Form, Button, Row, InputGroup } from "react-bootstrap";
 
 
 
-const initialFormData = Object.freeze({
-  username: "",
-  email:"",
-  password: "",
-  role:"1"
-  
-});
+class JoinForm extends Component {
+ 
+  constructor(props) {
+    super(props);
+    this.state = {
+      role: '1'
+     
+    };
 
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleUsernameChange(e) {
+    this.setState({username: e.target.value})
+  }
 
+  handleEmailChange(e) {
+    this.setState({email: e.target.value})
+  }
 
-// class JoinForm extends Component {
-//   render() {
-  const JoinForm = () => {
-    
-    
-    const [formData, updateFormData] = React.useState(initialFormData);
-    const handleChange = (e) => {
-      updateFormData({
-        ...formData,
-    
-        // Trimming any whitespace
-        [e.target.name]: e.target.value.trim()
+  handlePasswordChange(e) {
+    this.setState({password: e.target.value})
+  }
+  handleSubmit(e){
+      
+      fetch('/api/newUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // We convert the React state to JSON and send it as the POST body
+        body: JSON.stringify(this.state)
+      }).then(function(res) {
+        console.log(res)
+        return res.json();
       });
-    };
-    const handleSubmit = (e) => {
-      
-      
-      // fetch('/newUser', {
-      //   method: 'POST',
-      //   // We convert the React state to JSON and send it as the POST body
-      //   body: JSON.stringify(this.formData)
-      // }).then(function(response) {
-      //   console.log(response)
-      //   return response.json();
-      // });
-      console.log(formData);
+     
       e.preventDefault()
-      // ... submit to API or something
+      // ... submit to API o  r something
     };
-    
 
+
+
+  render() {
     return (
       <Row className="py-5">
         <Container className="d-flex flex-column mt-2 mb-5">
           <p className="align-self-center mb-2">Join Burden Off</p>
           <h1 className="align-self-center mb-5">Create your account</h1>
-          <Form className="align-self-center"  style={{ width: 450 }}>
-            <Form.Group  controlId="validationCustomUsername">
+          <Form
+            className="align-self-center"            
+            style={{ width: 450 }}
+          >
+            <Form.Group controlId="validationCustomUsername">
               <Form.Label>Username</Form.Label>
               <InputGroup>
                 <Form.Control
-                  onChange={handleChange}
+                  onChange={this.handleUsernameChange}
                   name="username"
                   type="text"
                   placeholder="Pick a username"
@@ -71,7 +79,7 @@ const initialFormData = Object.freeze({
               <Form.Control
                 name="email"
                 type="email"
-                onChange={handleChange}
+                onChange={this.handleEmailChange}
                 placeholder="Enter your email adress"
                 required
               />
@@ -85,7 +93,7 @@ const initialFormData = Object.freeze({
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
-                onChange={handleChange}
+                onChange={this.handlePasswordChange}
                 name="password"
                 type="password"
                 placeholder="Create a password"
@@ -100,14 +108,19 @@ const initialFormData = Object.freeze({
                 label="By creating an account, you agree to the Terms of Service. "
               />
             </Form.Group>
-            <Button variant="warning" type="submit" onClick={handleSubmit} style={{ width: 450 }}>
+            <Button
+              variant="warning"
+              type="submit"
+              onClick={this.handleSubmit}
+              style={{ width: 450 }}
+            >
               Sign Up
             </Button>
           </Form>
         </Container>
       </Row>
     );
-    }
-
+  }
+}
 
 export default JoinForm;
