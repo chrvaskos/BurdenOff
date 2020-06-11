@@ -9,9 +9,9 @@ class LoginForm extends Component {
         <Container className="d-flex flex-column my-3">
           <h1 className="align-self-center mb-5">Logo</h1>
           <Form className="align-self-center" style={{ width: 300 }}>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Email" />
+            <Form.Group controlId="validationCustomUsername">
+              <Form.Label>Username</Form.Label>
+              <Form.Control type="text" placeholder="Username" />
             </Form.Group>
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
