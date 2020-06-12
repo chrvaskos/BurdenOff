@@ -67,8 +67,7 @@ class JoinForm extends Component {
               <Form.Label>Username</Form.Label>
               <InputGroup>
                 <Form.Control
-                  onChange={this.handleUsernameChange}
-                  name="username"
+                  onChange={this.handleUsernameChange}                  
                   type="text"
                   placeholder="Pick a username"
                   aria-describedby="inputGroupPrepend"
@@ -81,8 +80,7 @@ class JoinForm extends Component {
             </Form.Group>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Εmail address</Form.Label>
-              <Form.Control
-                name="email"
+              <Form.Control                
                 type="email"
                 onChange={this.handleEmailChange}
                 placeholder="Enter your email adress"
@@ -98,8 +96,7 @@ class JoinForm extends Component {
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
-                onChange={this.handlePasswordChange}
-                name="password"
+                onChange={this.handlePasswordChange}                
                 type="password"
                 placeholder="Create a password"
                 data-toggle="popover"

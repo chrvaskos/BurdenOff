@@ -48,6 +48,7 @@ class LoginForm extends Component {
                 console.log("We in");
                 UserProfile.setName(this.state.userArray[i].username);
                 UserProfile.setRole(this.state.userArray[i].role);
+                UserProfile.setID(this.state.userArray[i].id);
                 this.setState({ redirect: true });
               } else console.log("We out");
             }.bind(this)

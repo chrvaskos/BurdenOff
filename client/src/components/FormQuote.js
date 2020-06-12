@@ -1,9 +1,56 @@
 import React, { Component } from "react";
 import { Container, Button, Col, Row, Form } from "react-bootstrap";
 import styled from "styled-components";
+import { Redirect } from 'react-router-dom';
 
 class FormQuote extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      role: "1",
+      redirect: false,
+    };
+
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleUsernameChange(e) {
+    this.setState({ username: e.target.value });
+  }
+
+  handleEmailChange(e) {
+    this.setState({ email: e.target.value });
+  }
+
+  handlePasswordChange(e) {
+    this.setState({ password: e.target.value });
+  }
+  handleSubmit(e) {
+    fetch("/api/newUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // We convert the React state to JSON and send it as the POST body
+      body: JSON.stringify(this.state),
+    }).then(
+      function (res) {
+        console.log(res);
+        this.setState({ redirect: true });
+        return res.json();
+      }.bind(this)
+    );
+    e.preventDefault();
+    // ... submit to API o  r something
+  }
+
   render() {
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/" />;
+    }
     return (
       <StyledDiv className="bg-dark text-light">
         <Container>
@@ -37,6 +84,7 @@ class FormQuote extends Component {
                   <Form.Label>Username</Form.Label>
                   <Form.Control
                     type="user"
+                    onChange={this.handleUsernameChange}
                     placeholder="Pick a username"
                     required
                   />
@@ -46,6 +94,7 @@ class FormQuote extends Component {
                 <Form.Group controlId="formGroupEmail">
                   <Form.Label>Email address</Form.Label>
                   <Form.Control
+                    onChange={this.handleEmailChange}
                     type="email"
                     placeholder="Enter your email"
                     required
@@ -56,6 +105,7 @@ class FormQuote extends Component {
                 <Form.Group controlId="formGroupPassword">
                   <Form.Label>Password</Form.Label>
                   <Form.Control
+                    onChange={this.handlePasswordChange}
                     type="password"
                     placeholder="Create a password"
                     required
@@ -67,7 +117,12 @@ class FormQuote extends Component {
                 md="3"
                 className="d-flex flex-column justify-content-center align-content-center"
               >
-                <Button className="mt-3" variant="warning" type="submit">
+                <Button
+                  onClick={this.handleSubmit}
+                  className="mt-3"
+                  variant="warning"
+                  type="submit"
+                >
                   Sign Up Now!
                 </Button>
               </Col>

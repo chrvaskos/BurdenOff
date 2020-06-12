@@ -1,9 +1,65 @@
 import React, { Component } from "react";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
+import {  Redirect } from "react-router-dom";
+import UserProfile from "../util/UserProfile";
 
 class SubmitForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      solved: "0",
+      user_id_fk: `${UserProfile.getID()}`,
+      checked: false,
+      redirect: false
+    };
+
+    this.handleTitleChange = this.handleTitleChange.bind(this);
+    this.handleCategoryChange = this.handleCategoryChange.bind(this);
+    this.handleContentChange = this.handleContentChange.bind(this);
+    this.handleCheckClick=this.handleCheckClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleCheckClick(e){
+    this.setState({ checked: !this.state.checked });
+  };
+
+  handleTitleChange(e) {
+    this.setState({ title: e.target.value });
+  }
+
+  handleCategoryChange(e) {
+    this.setState({ category: e.target.value });
+  }
+
+  handleContentChange(e) {
+    this.setState({ content: e.target.value });
+  }
+
+  handleSubmit(e) {   
+    fetch("/api/newPost", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // We convert the React state to JSON and send it as the POST body
+      body: JSON.stringify(this.state),
+    }).then(
+      function (res) {              
+        this.setState({ redirect: true });
+        return res.json();
+      }.bind(this)
+    );
+    e.preventDefault();
+    // ... submit to API o  r something
+  }
+
   render() {
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to='/posts'/>;
+    }
     return (
       <Container className="d-flex flex-column justify-content-center align-items-center my-3">
         <CenterContent>
@@ -11,7 +67,7 @@ class SubmitForm extends Component {
           <Form className="mx-1 my-4">
             <Form.Group controlId="exampleForm.ControlSelect1">
               <Form.Label>Category</Form.Label>
-              <Form.Control as="select">
+              <Form.Control onChange={this.handleCategoryChange} as="select">
                 <option selected hidden>
                   Choose Category
                 </option>
@@ -24,6 +80,7 @@ class SubmitForm extends Component {
             <Form.Group md="4" controlId="validationCustom01">
               <Form.Label>Title</Form.Label>
               <Form.Control
+                onChange={this.handleTitleChange}
                 type="text"
                 placeholder="Title (optional)"
               />
@@ -32,6 +89,7 @@ class SubmitForm extends Component {
             <Form.Group controlId="exampleForm.ControlTextarea1">
               <Form.Label>Post</Form.Label>
               <Form.Control
+                onChange={this.handleContentChange}
                 as="textarea"
                 rows="9"
                 placeholder="Your post"
@@ -41,11 +99,15 @@ class SubmitForm extends Component {
             <Row className="d-flex flex-column">
               <Col>
                 <Form.Group>
-                  <Form.Check label="Make the post public" />
+                  <Form.Check
+                    checked={this.state.checked}
+                    onChange={this.handleCheckClick}
+                    label="Make the post public"
+                  />
                 </Form.Group>
               </Col>
               <Col>
-                <Button variant="primary" type="submit">
+                <Button  onClick={this.handleSubmit} variant="primary" type="submit">
                   Submit
                 </Button>
               </Col>

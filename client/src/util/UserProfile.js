@@ -1,10 +1,30 @@
 var UserProfile = (function() {
     var name = "";
-    var role="";
+    var role="0";
+    var ID="";
+    var verified="";
   
     var getName = function() {
       return this.name;    // Or pull this from cookie/localStorage
     };
+    var getID = function() {
+      return this.ID;    // Or pull this from cookie/localStorage
+    };
+
+    var setVerified = function(verified) {
+      this.verified = verified;     
+      // Also set this in cookie/localStorage
+    };
+
+    var getVerified = function() {
+      return this.verified;    // Or pull this from cookie/localStorage
+    };
+
+    var setID = function(ID) {
+      this.ID = ID;     
+      // Also set this in cookie/localStorage
+    };
+
   
     var setName = function(name) {
       this.name = name;     
@@ -25,7 +45,9 @@ var UserProfile = (function() {
       getName: getName,
       setName: setName,
       getRole: getRole,
-      setRole: setRole
+      setRole: setRole,
+      getID: getID,
+      setID: setID
     }
   
   })();
