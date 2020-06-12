@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import UserProfile from '../util/UserProfile';
+import { Link, Redirect } from "react-router-dom";
+import UserProfile from "../util/UserProfile";
 
 class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       userArray: [],
-      passwordArray: []
+      passwordArray: [],
+      redirect: false
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    
   }
   handleUsernameChange(e) {
     this.setState({ username: e.target.value });
@@ -42,16 +42,16 @@ class LoginForm extends Component {
           .then(function (res) {
             return res.text();
           })
-          .then(function (matched){
-            
-            if (matched == "Success") {
-              console.log("We in");
-              UserProfile.setName(this.state.userArray[i].username);
-              UserProfile.setRole(this.state.userArray[i].role);
-                           
-
-            } else console.log("We out");
-          }.bind(this));
+          .then(
+            function (matched) {
+              if (matched == "Success") {
+                console.log("We in");
+                UserProfile.setName(this.state.userArray[i].username);
+                UserProfile.setRole(this.state.userArray[i].role);
+                this.setState({ redirect: true });
+              } else console.log("We out");
+            }.bind(this)
+          );
       }
 
       // if res == true, password matched
@@ -63,6 +63,10 @@ class LoginForm extends Component {
   }
 
   render() {
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to='/'/>;
+    }
     return (
       <Row className="py-5">
         <Container className="d-flex flex-column my-3">

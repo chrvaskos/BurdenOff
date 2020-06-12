@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from 'react-router-dom';
 import { Container, Form, Button, Row, InputGroup } from "react-bootstrap";
 
 
@@ -8,8 +9,8 @@ class JoinForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      role: '1'
-     
+      role: '1',
+      redirect: false
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -39,9 +40,9 @@ class JoinForm extends Component {
         body: JSON.stringify(this.state)
       }).then(function(res) {
         console.log(res)
+        this.setState({ redirect: true });
         return res.json();
-      });
-     
+      }.bind(this));    
       e.preventDefault()
       // ... submit to API o  r something
     };
@@ -49,6 +50,10 @@ class JoinForm extends Component {
 
 
   render() {
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to='/'/>;
+    }
     return (
       <Row className="py-5">
         <Container className="d-flex flex-column mt-2 mb-5">
