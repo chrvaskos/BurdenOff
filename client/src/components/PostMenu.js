@@ -1,28 +1,22 @@
-import React, { Component } from "react";
-import { Nav } from "react-bootstrap";
+import React, { useState } from "react";
+import { Tabs, Tab } from "react-bootstrap";
 
-class PostMenu extends Component {
-  render() {
-    return (
-      <Nav variant="pills" defaultActiveKey="All" className="my-1 mx-1">
-        <Nav.Item>
-          <Nav.Link eventKey="All">All Posts</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="1">Category 1</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="2">Category 2</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="3">Category 3</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="4">Category 4</Nav.Link>
-        </Nav.Item>
-      </Nav>
-    );
-  }
+function PostMenu() {
+  const [key, setKey] = useState("All");
+
+  console.log(`to key einai: ${key}`);
+  
+  return (
+    
+    <Tabs id="category-tabs" activeKey={key} onSelect={(k) => setKey(k)}>
+      <Tab eventKey="All" title="All Posts"></Tab>
+      <Tab eventKey="1" title="Category 1"></Tab>
+      <Tab eventKey="2" title="Category 2"></Tab>
+      <Tab eventKey="3" title="Category 3"></Tab>
+      <Tab eventKey="4" title="Category 4"></Tab>
+    </Tabs>
+    
+  );
 }
 
 export default PostMenu;

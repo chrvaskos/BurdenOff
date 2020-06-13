@@ -47,8 +47,6 @@ class JoinForm extends Component {
       // ... submit to API o  r something
     };
 
-
-
   render() {
     const { redirect } = this.state;
     if (redirect) {
