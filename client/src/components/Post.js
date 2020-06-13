@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Card, ListGroup } from "react-bootstrap";
+import globalVariables from "../util/globalVariables";
 
 
 
@@ -8,6 +9,7 @@ class Post extends Component {
     super();
     this.state = {
       postArray: [],
+      posts:[]
     };
   }
 
@@ -18,13 +20,29 @@ class Post extends Component {
         this.setState({ postArray })
         
       );
+
+
   }
+
+
   
   render() {
+    let currentKey=globalVariables.getKey();
+    this.state.posts=[];    
+    if(currentKey==="All"){
+      this.state.posts=this.state.postArray;
+    }else{
+      for(let i=0;i<this.state.postArray.length;i++){
+        if(this.state.postArray[i].category===parseInt(currentKey)){
+          this.state.posts.push(this.state.postArray[i]);
+        }
+      }
+    }
+    
     return (
       <div>
         
-        {this.state.postArray.map((post) => (
+        {this.state.posts.map((post) => (
           <Card key={post.id} className="my-3 mx-1">
             <Card.Header>{post.title}</Card.Header>
             <ListGroup variant="flush">
