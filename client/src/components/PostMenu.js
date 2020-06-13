@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Tabs, Tab } from "react-bootstrap";
-import globalVariables from "../util/globalVariables";
 import { useHistory } from "react-router-dom";
 
 function PostMenu() {
   const [key, setKey] = useState("All");
   const history = useHistory();
-  globalVariables.setKey(key);  
+  
+  sessionStorage.setItem('key',key)  ;
 
   return (
     <Tabs

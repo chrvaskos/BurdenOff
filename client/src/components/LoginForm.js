@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
-import UserProfile from "../util/UserProfile";
+
 
 class LoginForm extends Component {
   constructor(props) {
@@ -46,12 +46,13 @@ class LoginForm extends Component {
             function (matched) {
               if (matched == "Success") {
                 console.log("We in");
+                sessionStorage.setItem('username',this.state.userArray[i].username) ;               
+                sessionStorage.setItem('role',this.state.userArray[i].role);
+                sessionStorage.setItem('ID',this.state.userArray[i].id);
+                sessionStorage.setItem('verified',this.state.userArray[i].verified);
+
                 
-                UserProfile.setName(this.state.userArray[i].username);
-                UserProfile.setRole(this.state.userArray[i].role);
-                UserProfile.setID(this.state.userArray[i].id);
-                UserProfile.setVerified(this.state.userArray[i].verified);
-                console.log(UserProfile.getVerified());
+                
                 this.setState({ redirect: true });
               } else console.log("We out");
             }.bind(this)

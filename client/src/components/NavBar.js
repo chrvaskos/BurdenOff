@@ -9,14 +9,14 @@ import {
 } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import { HashLink as NavLink } from "react-router-hash-link";
-import UserProfile from "../util/UserProfile";
+
 
 class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      role: UserProfile.getRole(),
-      redirect: false,
+      role: sessionStorage.getItem('role'),
+      redirect: false
     };
   }
   render() {
@@ -29,7 +29,8 @@ class NavBar extends Component {
         return <Redirect to="/" />;
       }
     }
-    if (this.state.role === 1 || this.state.role === 2) {
+    console.log(`eimai to role sto navbar${this.state.role}`);
+    if (this.state.role === "1" || this.state.role === "2") {
       return (
         <Navbar variant="dark" bg="dark" expand="lg">
           <Container>
@@ -88,7 +89,7 @@ class NavBar extends Component {
               <Button
                 onClick={() => {
                   this.setState({ redirect: true });
-                  UserProfile.logOut();
+                  sessionStorage.clear();
                 }}
                 variant="danger"
                 className="ml-1"

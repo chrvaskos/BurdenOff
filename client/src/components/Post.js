@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Card, ListGroup } from "react-bootstrap";
-import globalVariables from "../util/globalVariables";
-import UserProfile from "../util/UserProfile";
+
 
 
 
@@ -10,8 +9,8 @@ class Post extends Component {
     super();
     this.state = {
       postArray: [],
-      posts:[],
-      verified:UserProfile.getVerified()
+      posts:[],      
+      verified:sessionStorage.getItem('verified')
     };
   }
 
@@ -30,7 +29,7 @@ class Post extends Component {
 
   
   render() {
-    let currentKey=globalVariables.getKey();
+    let currentKey=sessionStorage.getItem('key');
     this.state.posts=[];    
     if(currentKey==="All"){
       this.state.posts=this.state.postArray;

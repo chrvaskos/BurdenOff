@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
 import {  Redirect } from "react-router-dom";
-import UserProfile from "../util/UserProfile";
+
 
 class SubmitForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       solved: "0",
-      user_id_fk: `${UserProfile.getID()}`,
+      user_id_fk: sessionStorage.getItem('ID'),
       checked: false,
       redirect: false
     };
