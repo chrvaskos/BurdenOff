@@ -59,4 +59,15 @@ router.post("/newExpert", (request, response, next) => {
     });
   });
 
+  router.get("/posts/:verified", async (req, res, next) => {
+    try {      
+      let Results = await db.visiblePosts(req.params.verified);
+      let postArray = Array.from(Results);
+      res.json(postArray);
+    } catch (e) {
+      console.log(e);
+      res.sentStatus(500);
+    }
+  });
+
 module.exports = router;

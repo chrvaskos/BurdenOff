@@ -46,9 +46,12 @@ class LoginForm extends Component {
             function (matched) {
               if (matched == "Success") {
                 console.log("We in");
+                
                 UserProfile.setName(this.state.userArray[i].username);
                 UserProfile.setRole(this.state.userArray[i].role);
                 UserProfile.setID(this.state.userArray[i].id);
+                UserProfile.setVerified(this.state.userArray[i].verified);
+                console.log(UserProfile.getVerified());
                 this.setState({ redirect: true });
               } else console.log("We out");
             }.bind(this)

@@ -55,6 +55,8 @@ var UserProfile = (function () {
     getID: getID,
     setID: setID,
     logOut: logOut,
+    getVerified: getVerified,
+    setVerified: setVerified
   };
 })();
 

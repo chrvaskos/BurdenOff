@@ -42,7 +42,7 @@ burdenoff.allUsers = () => {
 
 burdenoff.postUser = (request) => {
   pool.query(
-    `INSERT INTO users (username, password, email, role) VALUES ('${request.username}', '${request.password}', '${request.email}','${request.role}')`,
+    `INSERT INTO users (username, password, email, role,verified) VALUES ('${request.username}', '${request.password}', '${request.email}','${request.role}',${request.verified})`,
     (err, result) => {
       if (err) {
         throw err;
@@ -77,5 +77,27 @@ burdenoff.postExpert = (request) => {
         return result;
       }
     );
+  };
+
+  burdenoff.visiblePosts = (verified) => {
+    return new Promise((resolve, reject) => {
+       
+      if(verified==="1"){
+        pool.query("SELECT * FROM posts" ,(err, results) => {      
+        if (err) {
+          return reject(err);
+        }
+        return resolve(results);
+      });
+    }else{
+      pool.query("SELECT * FROM posts WHERE visibility =  1",(err, results) => {
+      
+        if (err) {
+          return reject(err);
+        }
+        return resolve(results);
+      });
+    }
+    });
   };
 module.exports = burdenoff;

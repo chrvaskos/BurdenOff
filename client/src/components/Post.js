@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Card, ListGroup } from "react-bootstrap";
 import globalVariables from "../util/globalVariables";
+import UserProfile from "../util/UserProfile";
 
 
 
@@ -9,12 +10,14 @@ class Post extends Component {
     super();
     this.state = {
       postArray: [],
-      posts:[]
+      posts:[],
+      verified:UserProfile.getVerified()
     };
   }
 
   componentDidMount() {
-    fetch("/api/posts")
+    
+    fetch(`/api/posts/${this.state.verified}`)
       .then((res) => res.json())
       .then((postArray) =>
         this.setState({ postArray })
@@ -38,6 +41,7 @@ class Post extends Component {
         }
       }
     }
+    
     
     return (
       <div>

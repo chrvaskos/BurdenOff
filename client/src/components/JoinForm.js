@@ -10,6 +10,7 @@ class JoinForm extends Component {
     super(props);
     this.state = {
       role: '1',
+      verified: '0',
       redirect: false
     };
 
