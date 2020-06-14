@@ -110,4 +110,26 @@ burdenoff.postExpert = (request) => {
       });
     });
   };
+
+  burdenoff.getConv = (user_id) => {
+    return new Promise((resolve, reject) => {      
+      pool.query("SELECT * FROM conversation WHERE user_one= ? OR user_two= ?",[user_id ,user_id], (err, results) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(results);
+      });
+    });
+  };
+
+  burdenoff.getOne = (id) => {
+    return new Promise((resolve, reject) => {      
+      pool.query("SELECT username FROM users WHERE id= ?",[id], (err, results) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(results);
+      });
+    });
+  };
 module.exports = burdenoff;

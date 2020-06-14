@@ -73,12 +73,36 @@ router.post("/newExpert", (request, response, next) => {
   router.get("/replies/:c_id", async (req, res, next) => {
     try {      
       let Results = await db.getReplies(req.params.c_id);
-      let postArray = Array.from(Results);
-      res.json(postArray);
+      let replyArray = Array.from(Results);
+      res.json(replyArray);
     } catch (e) {
       console.log(e);
       res.sentStatus(500);
     }
   });
+
+  router.get("/conv/:user_id", async (req, res, next) => {
+    try {      
+      let Results = await db.getConv(req.params.user_id);
+      let convArray = Array.from(Results);
+      res.json(convArray);
+    } catch (e) {
+      console.log(e);
+      res.sentStatus(500);
+    }
+  });
+
+  router.get("/user/:id", async (req, res, next) => {
+    try {      
+      let Results = await db.getOne(req.params.id);
+      let oneArray = Array.from(Results);
+      res.json(oneArray);
+    } catch (e) {
+      console.log(e);
+      res.sentStatus(500);
+    }
+  });
+
+
 
 module.exports = router;
