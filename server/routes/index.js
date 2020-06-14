@@ -70,4 +70,15 @@ router.post("/newExpert", (request, response, next) => {
     }
   });
 
+  router.get("/replies/:c_id", async (req, res, next) => {
+    try {      
+      let Results = await db.getReplies(req.params.c_id);
+      let postArray = Array.from(Results);
+      res.json(postArray);
+    } catch (e) {
+      console.log(e);
+      res.sentStatus(500);
+    }
+  });
+
 module.exports = router;
