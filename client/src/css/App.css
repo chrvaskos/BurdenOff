@@ -23,6 +23,10 @@
   border-bottom: 0;
 }
 
-.session-container .chat-message:nth-of-type(even) {
+.session-container .chat-room .right {
   flex-direction: row-reverse;
+}
+
+.session-container .chat-room .left {
+  flex-direction: row;
 }

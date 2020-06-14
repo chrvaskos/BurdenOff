@@ -68,11 +68,13 @@ class Session extends Component {
                       author="Vasilis"
                       when="10:00"
                       message="Ep ti leei"
+                      position= "right"
                     />
                     <ChatMessage
                       author="Tsotiri"
                       when="11:00"
                       message="Ola kala bro"
+                      position= "left"
                     />
                     <ChatMessage
                       author="Tsotiri"
@@ -135,10 +137,10 @@ const Conv = ({ name, message, when, active }) => (
   </ListGroupItem>
 );
 
-const ChatMessage = ({ author, when, message }) => (
+const ChatMessage = ({ author, when, message, position }) => (
   <ListGroupItem
     as="li"
-    className="chat-message d-flex justify-content-between mb-4"
+    className={'chat-message d-flex justify-content-between mb-4 ' + position}
   >
     <Card>
       <Card.Body>
