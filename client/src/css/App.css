@@ -1,8 +1,12 @@
 .session-container .chat-row .chat-col {
   height: 60vh;
-  overflow: auto;
+  overflow-y: scroll;
+}
+
+.session-container .chat-row .chat-col .inner-chat-col{
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .session-container .chat-row .session-list {
