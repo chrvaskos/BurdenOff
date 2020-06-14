@@ -16,16 +16,14 @@ class Session extends Component {
     super();
     this.state = {
       replyArray: [],
-      c_id:"1"
+      c_id: "1",
     };
   }
 
   componentDidMount() {
-    fetch(/api/replies/${this.state.c_id})
+    fetch(`/api/replies/${this.state.c_id}`)
       .then((res) => res.json())
-      .then((replyArray) =>
-        this.setState({ replyArray })
-      );
+      .then((replyArray) => this.setState({ replyArray }));
   }
 
   render() {
@@ -60,33 +58,39 @@ class Session extends Component {
             </Col>
             <Col md="8" xl="9" className="pl-md-3 px-lg-auto mt-2 mt-md-0">
               <Col className="chat-col">
-                <ListGroup as="ul" className="list-unstyled p-3 chat-room">
-                  <ChatMessage
-                    author="Vasilis"
-                    when="10:00"
-                    message="Ep ti leei"
-                  />
-                  <ChatMessage
-                    author="Tsotiri"
-                    when="11:00"
-                    message="Ola kala bro"
-                  />
-                  <ChatMessage
-                    author="Tsotiri"
-                    when="11:00"
-                    message="Ola kala bro"
-                  />
-                  <ChatMessage
-                    author="Tsotiri"
-                    when="11:00"
-                    message="Ola kala bro"
-                  />
-                  <ChatMessage
-                    author="Tsotiri"
-                    when="11:00"
-                    message="Ola kala bro"
-                  />
-                </ListGroup>
+                <Col className="inner-chat-col">
+                  <ListGroup
+                    as="ul"
+                    id="chat-room"
+                    className="list-unstyled p-3 chat-room"
+                  >
+                    <ChatMessage
+                      author="Vasilis"
+                      when="10:00"
+                      message="Ep ti leei"
+                    />
+                    <ChatMessage
+                      author="Tsotiri"
+                      when="11:00"
+                      message="Ola kala bro"
+                    />
+                    <ChatMessage
+                      author="Tsotiri"
+                      when="11:00"
+                      message="Ola kala bro"
+                    />
+                    <ChatMessage
+                      author="Tsotiri"
+                      when="11:00"
+                      message="Ola kala bro"
+                    />
+                    <ChatMessage
+                      author="Tsotiri"
+                      when="11:00"
+                      message="Ola kala bro"
+                    />
+                  </ListGroup>
+                </Col>
               </Col>
               <Form className="my-3">
                 <Form.Group controlId="exampleForm.ControlTextarea1">
