@@ -18,43 +18,39 @@ class Session extends Component {
       replyArray: [],
       c_id: "1",
       convArray: [],
-      userArray:''
-
+      userArray: [],
     };
-   
+    this.getOtherName = this.getOtherName.bind(this);
   }
 
   componentDidMount() {
-
-
-    fetch(`/api/conv/${sessionStorage.getItem('ID')}`)
+    fetch(`/api/conv/${sessionStorage.getItem("ID")}`)
       .then((res) => res.json())
       .then((convArray) => this.setState({ convArray }));
-
-
 
     fetch(`/api/replies/${this.state.c_id}`)
       .then((res) => res.json())
       .then((replyArray) => this.setState({ replyArray }));
+
+    fetch(`/api/users`)
+      .then((res) => res.json())
+      .then((userArray) => this.setState({ userArray }));
   }
 
-  // getName(id1,id2){
-  //   let username='';
-  //   let id;    
-  //   if(id1!==parseInt(sessionStorage.getItem('ID'))){
-  //     id=id1;
-  //   }else{
-  //     id=id2;
-  //   }
-  //   fetch(`/api/user/${id}`)
-  //   .then((res) => res.json())
-  //  .then((userArray) => this.setState({ userArray }));
-  //   console.log(this.state.udsdsderArray)
-  //   return username;
-      
-      
+  getName() {}
 
-  
+  getOtherName(id1, id2) {
+    let id;
+    if (id1 !== parseInt(sessionStorage.getItem("ID"))) {
+      id = id1;
+    } else {
+      id = id2;
+    }
+    console.log(this.state.convArray.length);
+    console.log(this.state.userArray[0]);
+  }
+
+  // console.log(`${this.state.userArray}`);
 
   render() {
     return (
@@ -64,16 +60,19 @@ class Session extends Component {
             <Col md="4" xl="3" className="px-0 mb-2 mb-md-0">
               <h3 className="font-weight-bold m-3 text-lg-left">Sessions</h3>
               <Col className="z-depth-1 p-3">
-              
                 <ListGroup as="ul" className="session-list">
-                {this.state.convArray.map((conv) => (          
-                  <Conv
-                    key={conv.c_id}
-                    name= "giwrogs"
-                    title={conv.title}                    
-                    active={true}
-                  />
-                ))}                  
+                  {this.state.convArray.map((conv) => (
+                    <Conv
+                      key={conv.c_id}
+                      name={this.getOtherName(
+                        true,
+                        conv.user_one,
+                        conv.user_two
+                      )}
+                      title={conv.title}
+                      active={true}
+                    />
+                  ))}
                 </ListGroup>
               </Col>
             </Col>
@@ -85,33 +84,14 @@ class Session extends Component {
                     id="chat-room"
                     className="list-unstyled p-3 chat-room"
                   >
-                    <ChatMessage
-                      author="Vasilis"
-                      when="10:00"
-                      message="Ep ti leei"
-                      position= "right"
-                    />
-                    <ChatMessage
-                      author="Tsotiri"
-                      when="11:00"
-                      message="Ola kala bro"
-                      position= "left"
-                    />
-                    <ChatMessage
-                      author="Tsotiri"
-                      when="11:00"
-                      message="Ola kala bro"
-                    />
-                    <ChatMessage
-                      author="Tsotiri"
-                      when="11:00"
-                      message="Ola kala bro"
-                    />
-                    <ChatMessage
-                      author="Tsotiri"
-                      when="11:00"
-                      message="Ola kala bro"
-                    />
+                    {this.state.replyArray.map((reply) => (
+                      <ChatMessage
+                        author="Vasilis"
+                        when="10:00"
+                        message="Ep ti leei"
+                        position="right"
+                      />
+                    ))}
                   </ListGroup>
                 </Col>
               </Col>
@@ -140,7 +120,7 @@ class Session extends Component {
   }
 }
 
-const Conv = ({ name, title,  active }) => (
+const Conv = ({ name, title, active }) => (
   <ListGroupItem
     as="li"
     className="d-flex justify-content-between p-2 border-light"
@@ -150,16 +130,15 @@ const Conv = ({ name, title,  active }) => (
       <strong>{name}</strong>
       <p className="text-muted">{title}</p>
     </div>
-   
   </ListGroupItem>
 );
 
 const ChatMessage = ({ author, when, message, position }) => (
   <ListGroupItem
     as="li"
-    className={'chat-message d-flex justify-content-between mb-4 ' + position}
+    className={"chat-message d-flex justify-content-between mb-4 " + position}
   >
-    <Card >
+    <Card>
       <Card.Body>
         <div>
           <strong className="primary-font">{author}</strong>
