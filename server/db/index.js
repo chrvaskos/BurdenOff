@@ -100,4 +100,14 @@ burdenoff.postExpert = (request) => {
     }
     });
   };
+  burdenoff.getReplies = (c_id) => {
+    return new Promise((resolve, reject) => {
+      pool.query("SELECT * FROM conversation_reply WHERE c_id_fk= ?",[c_id], (err, results) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(results);
+      });
+    });
+  };
 module.exports = burdenoff;
