@@ -95,15 +95,18 @@ router.post("/newExpert", (request, response, next) => {
   router.get("/user/:id", async (req, res, next) => {
     try {      
       let Results = await db.getOne(req.params.id);
-      let oneArray = Array.from(Results);
-      
-      res.json(oneArray);
-      
+      let oneArray = Array.from(Results);      
+      res.json(oneArray);     
           
     } catch (e) {
       console.log(e);
       res.sentStatus(500);
     }
+  });
+
+  router.post("/newReply", (request, response, next) => {      
+    db.postReply(request.body);
+    response.json(db);
   });
 
 

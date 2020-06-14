@@ -29,7 +29,6 @@ class NavBar extends Component {
         return <Redirect to="/" />;
       }
     }
-    console.log(`eimai to role sto navbar${this.state.role}`);
     if (this.state.role === "1" || this.state.role === "2") {
       return (
         <Navbar variant="dark" bg="dark" expand="lg">

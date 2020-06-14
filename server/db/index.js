@@ -132,4 +132,17 @@ burdenoff.postExpert = (request) => {
       });
     });
   };
+
+  burdenoff.postReply = (request) => {
+    pool.query(
+      `INSERT INTO conversation_reply (c_id_fk, reply, time, user_id_fk) VALUES 
+          ('${request.c_id_fk}', '${request.reply}', '${request.time}', '${request.user_id_fk}')`,
+      (err, result) => {
+        if (err) {
+          throw err;
+        }
+        return result;
+      }
+    );
+  };
 module.exports = burdenoff;

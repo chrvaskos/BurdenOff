@@ -11,16 +11,29 @@ import {
 } from "react-bootstrap";
 import "../css/App.css";
 
+
 class Session extends Component {
   constructor() {
     super();
     this.state = {
       replyArray: [],
-      c_id: "1",
+      c_id_fk: "1",
       convArray: [],
       userArray: [],
+      time:"",
+      user_id_fk:sessionStorage.getItem("ID"),
+      redirect: false
+      
+
     };
+    fetch(`/api/users`)
+      .then((res) => res.json())
+      .then((userArray) => this.setState({ userArray }));
     this.getOtherName = this.getOtherName.bind(this);
+    this.getPosition = this.getPosition.bind(this);
+    this.getName=this.getName.bind(this);
+    this.handleMessageChange=this.handleMessageChange.bind(this);
+    this.handleSubmit=this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -28,16 +41,18 @@ class Session extends Component {
       .then((res) => res.json())
       .then((convArray) => this.setState({ convArray }));
 
-    fetch(`/api/replies/${this.state.c_id}`)
+    fetch(`/api/replies/${this.state.c_id_fk}`)
       .then((res) => res.json())
       .then((replyArray) => this.setState({ replyArray }));
-
-    fetch(`/api/users`)
-      .then((res) => res.json())
-      .then((userArray) => this.setState({ userArray }));
   }
 
-  getName() {}
+  getName(id) {
+    for (let i = 0; i < this.state.userArray.length; i++) {
+      if (parseInt(this.state.userArray[i].id) === id) {       
+        return this.state.userArray[i].username;
+      }
+    }
+  }
 
   getOtherName(id1, id2) {
     let id;
@@ -46,13 +61,52 @@ class Session extends Component {
     } else {
       id = id2;
     }
-    console.log(this.state.convArray.length);
-    console.log(this.state.userArray[0]);
+    for (let i = 0; i < this.state.userArray.length; i++) {
+      if (parseInt(this.state.userArray[i].id) === id) {
+        console.log(this.state.userArray[i].username);
+        return this.state.userArray[i].username;
+      }
+    }
+  }
+  getPosition(id) {
+    if (id === parseInt(sessionStorage.getItem("ID"))) {
+      return "right";
+    } else {
+      return "left";
+    }
+  }
+
+  handleMessageChange(e) {
+    this.setState({ reply: e.target.value });
+  }
+
+  handleSubmit(e) {   
+    this.state.time=new Date().toLocaleString();
+    console.log(`${this.state.time}`);
+    fetch("/api/newReply", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // We convert the React state to JSON and send it as the POST body
+      body: JSON.stringify(this.state),
+    }).then(
+      function (res) {              
+        this.setState({ redirect: true });
+        return res.json();
+      }.bind(this)
+    );
+    e.preventDefault();
+    // ... submit to API o  r something
   }
 
   // console.log(`${this.state.userArray}`);
 
   render() {
+    const { redirect } = this.state;
+    if (redirect) {
+      window.location.reload();
+    }
     return (
       <Container className="mt-2 session-container">
         <Container className="border my-4">
@@ -64,11 +118,7 @@ class Session extends Component {
                   {this.state.convArray.map((conv) => (
                     <Conv
                       key={conv.c_id}
-                      name={this.getOtherName(
-                        true,
-                        conv.user_one,
-                        conv.user_two
-                      )}
+                      name={this.getOtherName(conv.user_one, conv.user_two)}
                       title={conv.title}
                       active={true}
                     />
@@ -86,10 +136,10 @@ class Session extends Component {
                   >
                     {this.state.replyArray.map((reply) => (
                       <ChatMessage
-                        author="Vasilis"
-                        when="10:00"
-                        message="Ep ti leei"
-                        position="right"
+                        author={this.getName(reply.user_id_fk)}
+                        when={reply.time}
+                        message={reply.reply}
+                        position={this.getPosition(reply.user_id_fk)}
                       />
                     ))}
                   </ListGroup>
@@ -98,6 +148,7 @@ class Session extends Component {
               <Form className="my-3">
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                   <Form.Control
+                  onChange={this.handleMessageChange}
                     as="textarea"
                     rows="3"
                     placeholder="Type your message..."
@@ -106,7 +157,7 @@ class Session extends Component {
                 </Form.Group>
                 <Row>
                   <Col className="d-flex justify-content-end">
-                    <Button variant="primary" type="submit">
+                    <Button onClick={this.handleSubmit} variant="primary" type="submit">
                       Send
                     </Button>
                   </Col>
