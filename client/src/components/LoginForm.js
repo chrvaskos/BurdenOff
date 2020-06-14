@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 
-
 class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       userArray: [],
       passwordArray: [],
-      redirect: false
+      redirect: false,
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -46,13 +45,17 @@ class LoginForm extends Component {
             function (matched) {
               if (matched == "Success") {
                 console.log("We in");
-                sessionStorage.setItem('username',this.state.userArray[i].username) ;               
-                sessionStorage.setItem('role',this.state.userArray[i].role);
-                sessionStorage.setItem('ID',this.state.userArray[i].id);
-                sessionStorage.setItem('verified',this.state.userArray[i].verified);
+                sessionStorage.setItem(
+                  "username",
+                  this.state.userArray[i].username
+                );
+                sessionStorage.setItem("role", this.state.userArray[i].role);
+                sessionStorage.setItem("ID", this.state.userArray[i].id);
+                sessionStorage.setItem(
+                  "verified",
+                  this.state.userArray[i].verified
+                );
 
-                
-                
                 this.setState({ redirect: true });
               } else console.log("We out");
             }.bind(this)
@@ -70,7 +73,7 @@ class LoginForm extends Component {
   render() {
     const { redirect } = this.state;
     if (redirect) {
-      return <Redirect to='/'/>;
+      return <Redirect to="/" />;
     }
     return (
       <Row className="py-5">
