@@ -32,6 +32,11 @@
 }
 
 .verify-experts-container .table-wrap {
+  height: 55vh;
+  overflow-y: auto;
+}
+
+.posts-container .posts-wrap {
   height: 75vh;
   overflow-y: auto;
 }

@@ -4,11 +4,12 @@ import Post from "./Post";
 import PostMenu from "./PostMenu";
 import CreatePost from "./CreatePost";
 import styled from "styled-components";
+import "../css/App.css";
 
 class Posts extends Component {
   render() {
     return (
-      <Container className="d-flex flex-column justify-content-center align-items-center">
+      <Container className="d-flex flex-column justify-content-center align-items-center posts-container">
         <CenterContent>
           <Row className="d-flex flex-row align-self-start">
             <h3 className="my-3 mx-1" style={{ color: "#343a40" }}>
@@ -25,7 +26,7 @@ class Posts extends Component {
             <PostMenu />
           </Row>
           <Row
-            className="d-flex flex-column align-self-start"
+            className="d-flex flex-column align-self-start posts-wrap mb-3"
             style={{ width: "100%" }}
           >
             <Post />
