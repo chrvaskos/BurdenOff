@@ -84,13 +84,13 @@ const PostCard = ({
     <ListGroup variant="flush">
       <ListGroup.Item variant="light" className="text-dark">
         {content}
-        <hr />
+        <hr className="mb-0 mt-1" />
         <small className="float-right text-muted m-0 p-0">
-          <i className="far" /> Posted by {user} at {when}
+          <i className="far m-0 p-0" /> Posted by {user} at {when}
         </small>
       </ListGroup.Item>
       <ListGroup.Item variant={solved ? "success" : "danger"}>
-        <div>
+        <div className="my-0 py-0">
           {solution}
           <Button className={"float-right " + visibility}>Start Session</Button>
         </div>
