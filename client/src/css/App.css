@@ -44,9 +44,7 @@
   cursor: pointer;
 }
 
-/* Style the active class (and buttons on mouse-over) */
-.active,
-.btn:hover {
-  background-color: #666;
-  color: white;
+.active, .btn:hover {
+  background-color: rgb(108, 188, 235) !important;
+  color: white !important;
 }
