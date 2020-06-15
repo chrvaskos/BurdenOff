@@ -2,6 +2,7 @@ const express = require("express");
 const db = require("../db");
 const request = require("request");
 const bcrypt = require("bcrypt");
+const { response } = require("express");
 const saltRounds = 10;
 
 const router = express.Router();
@@ -106,6 +107,16 @@ router.post("/newExpert", (request, response, next) => {
 
   router.post("/newReply", (request, response, next) => {      
     db.postReply(request.body);
+    response.json(db);
+  });
+
+  router.post("/newConv", (request, response, next) => {      
+    db.postConv(request.body);
+    response.json(db);
+  });
+
+  router.put("/putPost", (request,response,next) =>{
+       db.updatePost(request.body);
     response.json(db);
   });
 

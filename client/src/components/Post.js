@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Card, ListGroup, Button } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 
 class Post extends Component {
   constructor() {
@@ -9,7 +10,16 @@ class Post extends Component {
       posts: [],
       verified: sessionStorage.getItem("verified"),
       shouldShowButton: false,
+      userArray: [],
+      user_two: "",
+      title: "",
+      user_one: sessionStorage.getItem("ID"),
+      solved: "1",
+      id: "",
     };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.getVisibility = this.getVisibility.bind(this);
   }
 
   componentDidMount() {
@@ -18,7 +28,55 @@ class Post extends Component {
       .then((postArray) => this.setState({ postArray }));
   }
 
+  getVisibility(role, intended, solved) {
+    if (role === intended && solved === 0) {
+      return "";
+    } else {
+      return "invisible";
+    }
+  }
+  handleSubmit(e) {
+    this.state.user_two = e.target.getAttribute("user_id_fk");
+    this.state.title = e.target.getAttribute("title");
+    this.state.id = e.target.getAttribute("id");
+
+    fetch("/api/newConv", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // We convert the React state to JSON and send it as the POST body
+      body: JSON.stringify(this.state),
+    }).then(
+      function (res) {
+        return res.json();
+      }.bind(this)
+    );
+    e.preventDefault();
+
+    fetch("/api/putPost", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // We convert the React state to JSON and send it as the POST body
+      body: JSON.stringify(this.state),
+    }).then(
+      function (res) {
+        this.setState({ redirect: true });
+        return res.json();
+      }.bind(this)
+    );
+    e.preventDefault();
+
+    // ... submit to API o  r something
+  }
+
   render() {
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/session" />;
+    }
     let currentKey = sessionStorage.getItem("key");
     this.state.posts = [];
     if (currentKey === "All") {
@@ -34,34 +92,37 @@ class Post extends Component {
     return (
       <div>
         {this.state.posts.map((post) => (
-          <Card key={post.id} className="my-3 mx-1">
-            <Card.Header>{post.title}</Card.Header>
-            <ListGroup variant="flush">
-              <ListGroup.Item variant="light" className="text-dark">
-                Problem: {post.content}
-              </ListGroup.Item>
-              <ListGroup.Item variant="success">
-                Solution: {post.solution}
-              </ListGroup.Item>
-            </ListGroup>
-          </Card>
+          <PostCard
+            key={post.id}
+            title={post.title}
+            category={post.category}
+            content={post.content}
+            solution={post.solution}
+            user={post.username}
+            when={post.time}
+            visibility={this.getVisibility(
+              sessionStorage.getItem("role"),
+              "2",
+              post.solved
+            )}
+            deleteVis={this.getVisibility(
+              sessionStorage.getItem("role"),
+              "3",
+              0
+            )}
+            solved={post.solved}
+            user_id_fk={post.user_id_fk}
+            handleSubmit={this.handleSubmit}
+            id={post.id}
+          />
         ))}
-        <PostCard
-          title="Χρειαζομαι βοηθεια"
-          category="Bullying"
-          content="Με βαρανε στο σπιτι"
-          solution="Βαρα τους κι εσυ"
-          user="mhtsos123"
-          when="Sunday 6:23PM"
-          visibility=""
-          solved={0}
-        />
       </div>
     );
   }
 }
 
 const PostCard = ({
+  handleSubmit,
   title,
   category,
   content,
@@ -70,14 +131,21 @@ const PostCard = ({
   visibility,
   user,
   when,
+  user_id_fk,
+  deleteVis,
+  id,
 }) => (
   <Card className="my-3 mx-1">
     <Card.Header>
       <div>
-        <Button variant="danger" size="sm" className="float-left mr-2">
+        <strong>{title}</strong>
+        <Button
+          variant="danger"
+          size="sm"
+          className={"float-right mr-2 " + deleteVis}
+        >
           X
         </Button>
-        <strong>{title}</strong>
         <text className="float-right">{category}</text>
       </div>
     </Card.Header>
@@ -92,7 +160,15 @@ const PostCard = ({
       <ListGroup.Item variant={solved ? "success" : "danger"}>
         <div className="my-0 py-0">
           {solution}
-          <Button className={"float-right " + visibility}>Start Session</Button>
+          <Button
+            className={"float-right " + visibility}
+            title={title}
+            user_id_fk={user_id_fk}
+            id={id}
+            onClick={handleSubmit}
+          >
+            Start Session
+          </Button>
         </div>
       </ListGroup.Item>
     </ListGroup>

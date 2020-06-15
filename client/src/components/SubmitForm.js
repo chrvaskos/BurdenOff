@@ -11,7 +11,9 @@ class SubmitForm extends Component {
       solved: "0",
       user_id_fk: sessionStorage.getItem('ID'),
       checked: false,
-      redirect: false
+      redirect: false,
+      time:"",
+      username:"",
     };
 
     this.handleTitleChange = this.handleTitleChange.bind(this);
@@ -37,7 +39,9 @@ class SubmitForm extends Component {
     this.setState({ content: e.target.value });
   }
 
-  handleSubmit(e) {   
+  handleSubmit(e) {
+    this.state.time=new Date().toLocaleString();
+    this.state.username=sessionStorage.getItem("username")   ;
     fetch("/api/newPost", {
       method: "POST",
       headers: {
