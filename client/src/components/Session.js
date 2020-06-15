@@ -93,9 +93,22 @@ class Session extends Component {
     // ... submit to API o  r something
   }
   handleClick(e) {
+    var btnContainer = document.getElementById("session-list");
+    var btns = btnContainer.getElementsByClassName("btn");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function () {
+        var current = document.getElementsByClassName("active");
+
+        // If there's no active class
+        if (current.length > 0) {
+          current[0].className = current[0].className.replace(" active", "");
+        }
+
+        // Add the active class to the current/clicked button
+        this.className += " active";
+      });
+    }
     this.state.c_id_fk = e.currentTarget.getAttribute("c_id_fk");
-    console.log(e.currentTarget.attributes);
-    console.log(e.currentTarget.getAttribute("active"))  ;  
     fetch(`/api/replies/${this.state.c_id_fk}`)
       .then((res) => res.json())
       .then((replyArray) => this.setState({ replyArray }));
@@ -113,7 +126,7 @@ class Session extends Component {
             <Col md="4" xl="3" className="px-0 mb-2 mb-md-0">
               <h3 className="font-weight-bold m-3 text-lg-left">Sessions</h3>
               <Col className="z-depth-1 p-3">
-                <ListGroup as="ul" className="session-list">
+                <ListGroup as="ul" id="session-list" className="session-list">
                   {this.state.convArray.map((conv) => (
                     <Conv
                       key={conv.c_id}
@@ -176,13 +189,12 @@ class Session extends Component {
   }
 }
 
-const Conv = ({ name, title, handleClick, c_id_fk,colour }) => (
+const Conv = ({ name, title, handleClick, c_id_fk, colour }) => (
   <ListGroupItem
     as="button"
     c_id_fk={c_id_fk}
     onClick={handleClick}
-    className={"d-flex justify-content-between p-2 border-light bg-" + colour}    
-    
+    className={"d-flex justify-content-between p-2 border-light btn"}
   >
     <div style={{ fontSize: "0.95rem" }}>
       <strong>{name}</strong>
