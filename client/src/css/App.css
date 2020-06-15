@@ -36,7 +36,7 @@
   overflow-y: auto;
 }
 
-.btn {
+.convBtn {
   border: none;
   outline: none;
   padding: 10px 16px;
@@ -44,7 +44,7 @@
   cursor: pointer;
 }
 
-.active, .btn:hover {
+.active, .convBtn:hover {
   background-color: rgb(108, 188, 235) !important;
   color: white !important;
 }

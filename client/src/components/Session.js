@@ -94,7 +94,7 @@ class Session extends Component {
   }
   handleClick(e) {
     var btnContainer = document.getElementById("session-list");
-    var btns = btnContainer.getElementsByClassName("btn");
+    var btns = btnContainer.getElementsByClassName("convBtn");
     for (var i = 0; i < btns.length; i++) {
       btns[i].addEventListener("click", function () {
         var current = document.getElementsByClassName("active");
@@ -190,7 +190,7 @@ const Conv = ({ name, title, handleClick, c_id_fk, colour }) => (
     as="button"
     c_id_fk={c_id_fk}
     onClick={handleClick}
-    className={"d-flex justify-content-between p-2 border-light btn"}
+    className={"d-flex justify-content-between p-2 border-light convBtn"}
   >
     <div style={{ fontSize: "0.95rem" }}>
       <strong>{name}</strong>
