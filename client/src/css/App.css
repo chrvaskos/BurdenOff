@@ -3,7 +3,7 @@
   overflow-y: scroll;
 }
 
-.session-container .chat-row .chat-col .inner-chat-col{
+.session-container .chat-row .chat-col .inner-chat-col {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -29,4 +29,9 @@
 
 .session-container .chat-room .left {
   flex-direction: row;
+}
+
+.verify-experts-container .table-wrap {
+  height: 75vh;
+  overflow-y: auto;
 }

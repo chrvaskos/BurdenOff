@@ -11,6 +11,7 @@ import faq from "./pages/faq";
 import posts from "./pages/posts";
 import submit from "./pages/submit";
 import session from "./pages/session";
+import admin from "./pages/admin";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <Route path="/posts" component={posts} />
       <Route path="/submit" component={submit} />
       <Route path="/session" component={session} />
+      <Route path="/admin" component={admin} />
     </Switch>
   );
 }

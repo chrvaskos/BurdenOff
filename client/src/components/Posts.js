@@ -24,7 +24,10 @@ class Posts extends Component {
           <Row className="d-flex flex-row align-self-start">
             <PostMenu />
           </Row>
-          <Row className="d-flex flex-column">
+          <Row
+            className="d-flex flex-column align-self-start"
+            style={{ width: "100%" }}
+          >
             <Post />
           </Row>
         </CenterContent>
