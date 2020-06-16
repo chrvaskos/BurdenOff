@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import { Icon } from "react-icons-kit";
 import {ic_send} from 'react-icons-kit/md/ic_send'
+import SolvedButton from "./SolvedButton";
 import "../css/App.css";
 
 class Session extends Component {
@@ -167,6 +168,9 @@ class Session extends Component {
                   />
                 </Form.Group>
                 <Row>
+                <Col className="d-flex justify-content-start">
+                    <SolvedButton/>
+                  </Col>
                   <Col className="d-flex justify-content-end">
                     <Button
                       onClick={this.handleSubmit}

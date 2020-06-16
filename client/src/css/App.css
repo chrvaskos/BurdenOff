@@ -1,6 +1,6 @@
 .session-container .chat-row .chat-col {
   height: 60vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .session-container .chat-row .chat-col .inner-chat-col {
@@ -10,7 +10,14 @@
 }
 
 .session-container .chat-row .session-list {
-  overflow: auto;
+  height: 60vh;
+  overflow-y: auto;
+}
+@media only screen and (max-width: 768px){
+  .session-container .chat-row .session-list {
+    height: 30vh;
+    margin-bottom: 30px;
+  }
 }
 
 .session-container .session-list .list-group-item {
