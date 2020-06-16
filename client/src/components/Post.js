@@ -17,10 +17,12 @@ class Post extends Component {
       user_one: sessionStorage.getItem("ID"),
       solved: "1",
       id: "",
+      reload:false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getVisibility = this.getVisibility.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -75,10 +77,39 @@ class Post extends Component {
     // ... submit to API o  r something
   }
 
+
+  handleDelete(e){
+    this.state.id = e.target.getAttribute("id");    
+    console.log(e.target.getAttribute("id"))
+    var data={
+      id:this.state.id
+    }
+    fetch("/api/deletePost", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // We convert the React state to JSON and send it as the POST body
+      body: JSON.stringify(data),
+    }).then(
+      function (res) {
+        this.setState({ reload: true });
+        return res.json();
+      }.bind(this)
+    );
+    e.preventDefault();
+    
+
+  }
+
   render() {
     const { redirect } = this.state;
+    const { reload } = this.state;
     if (redirect) {
       return <Redirect to="/session" />;
+    }
+    if (reload) {
+      window.location.reload();
     }
     let currentKey = sessionStorage.getItem("key");
     this.state.posts = [];
@@ -117,6 +148,7 @@ class Post extends Component {
             user_id_fk={post.user_id_fk}
             handleSubmit={this.handleSubmit}
             id={post.id}
+            handleDelete={this.handleDelete}
           />
         ))}
       </div>
@@ -137,6 +169,7 @@ const PostCard = ({
   user_id_fk,
   deleteVis,
   id,
+  handleDelete,
 }) => (
   <Card className="my-3 mx-1">
     <Card.Header>
@@ -145,6 +178,8 @@ const PostCard = ({
         <Button
           variant="danger"
           size="sm"
+          id={id}
+          onClick={handleDelete}
           className={"float-right mr-2 " + deleteVis}
         >
           X

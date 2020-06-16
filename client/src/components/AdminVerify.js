@@ -3,6 +3,18 @@ import { Container, Row, Button, Table } from "react-bootstrap";
 import "../css/App.css";
 
 class AdminVerify extends Component {
+  constructor() {
+    super();
+    this.state = {
+      expertArray: [],
+      id: "",
+      verified: "",
+    };
+    fetch(`/api/expert`)
+      .then((res) => res.json())
+      .then((expertArray) => this.setState({ expertArray }));
+  }
+
   render() {
     return (
       <Container className="verify-experts-container">
@@ -19,84 +31,14 @@ class AdminVerify extends Component {
               </tr>
             </thead>
             <tbody>
-              <Expert
-                id="1"
-                username="bill"
-                email="bill4ever@gmail.com"
-                verified={1}
-              />
-              <Expert
-                id="2"
-                username="mhtsos"
-                email="eimaomhtsos@gmail.com"
-                verified={0}
-              />
-              <Expert
-                id="3"
-                username="tsotiri"
-                email="eimaithtsotiri@gmail.com"
-                verified={1}
-              />
-              <Expert
-                id="3"
-                username="tsotiri"
-                email="eimaithtsotiri@gmail.com"
-                verified={1}
-              />
-              <Expert
-                id="3"
-                username="tsotiri"
-                email="eimaithtsotiri@gmail.com"
-                verified={1}
-              />
-              <Expert
-                id="3"
-                username="tsotiri"
-                email="eimaithtsotiri@gmail.com"
-                verified={1}
-              />
-              <Expert
-                id="3"
-                username="tsotiri"
-                email="eimaithtsotiri@gmail.com"
-                verified={1}
-              />
-              <Expert
-                id="1"
-                username="bill"
-                email="bill4ever@gmail.com"
-                verified={1}
-              />
-              <Expert
-                id="1"
-                username="bill"
-                email="bill4ever@gmail.com"
-                verified={1}
-              />
-              <Expert
-                id="1"
-                username="bill"
-                email="bill4ever@gmail.com"
-                verified={1}
-              />
-              <Expert
-                id="1"
-                username="bill"
-                email="bill4ever@gmail.com"
-                verified={1}
-              />
-              <Expert
-                id="1"
-                username="bill"
-                email="bill4ever@gmail.com"
-                verified={1}
-              />
-              <Expert
-                id="1"
-                username="bill"
-                email="bill4ever@gmail.com"
-                verified={1}
-              />
+              {this.state.expertArray.map((expert) => (
+                <Expert
+                  id={expert.id}
+                  username={expert.username}
+                  email={expert.email}
+                  verified={expert.verified}
+                />
+              ))}
             </tbody>
           </Table>
         </Row>
@@ -112,8 +54,31 @@ const Expert = ({ id, username, email, verified }) => (
     <td>{email}</td>
     <td style={{ color: verified ? "green" : "red" }}>{verified}</td>
     <td>
-      <Button variant="success" size="sm">
-        Verify
+      <Button
+        onClick={(e) => {
+          let data = {
+            id: id,
+            verified: verified,
+          };
+          fetch("/api/putVerify", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            // We convert the React state to JSON and send it as the POST body
+            body: JSON.stringify(data),
+          }).then(
+            function (res) {
+              window.location.reload();
+              return res.json();
+            }.bind(this)
+          );
+          e.preventDefault();
+        }}
+        variant="success"
+        size="sm"
+      >
+        Toggle Verify
       </Button>
     </td>
   </tr>

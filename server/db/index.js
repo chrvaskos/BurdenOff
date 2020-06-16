@@ -200,4 +200,45 @@ burdenoff.putSolution = (request) => {
   );
 };
 
+burdenoff.deletePost = (request) => {
+  pool.query(
+    "DELETE FROM posts WHERE posts.id = ?",
+    [request.id],
+
+    (err, result) => {
+      if (err) {
+        throw err;
+      }
+      return result;
+    }
+  );
+};
+
+burdenoff.getExperts = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      "SELECT * FROM users WHERE role= 2",      
+      (err, results) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(results);
+      }
+    );
+  });
+};
+
+burdenoff.updateVerify = (request) => {
+  pool.query(
+    "UPDATE users SET verified= ?  WHERE users.id= ?",
+    [request.verified, request.id],
+    (err, result) => {
+      if (err) {
+        throw err;
+      }
+      return result;
+    }
+  );
+};
+
 module.exports = burdenoff;

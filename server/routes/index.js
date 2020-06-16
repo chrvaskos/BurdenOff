@@ -125,7 +125,34 @@ router.post("/newExpert", (request, response, next) => {
     db.putSolution(request.body);
  response.json(db);
 });
+
+router.delete("/deletePost", (request,response,next) =>{ 
   
+  db.deletePost(request.body);
+  response.json(db);
+});
+
+router.get("/expert", async (req, res, next) => {
+  try {      
+    let Results = await db.getExperts();
+    let expertArray = Array.from(Results);      
+    res.json(expertArray);           
+  } catch (e) {
+    console.log(e);
+    res.sentStatus(500);
+  }
+});
+
+router.put("/putVerify", (request,response,next) =>{  
+  if(request.body.verified===1){
+    request.body.verified=0;
+  }else{
+    request.body.verified=1;
+  }
+  db.updateVerify(request.body);
+response.json(db);
+});
+
 
 
 

@@ -199,7 +199,7 @@ const Conv = ({ name, title, handleClick, c_id_fk ,postId}) => (
     as="button"
     c_id_fk={c_id_fk}
     postId={postId}
-    onClick={handleClick}
+    onClick={()=>handleClick}
     className={"d-flex justify-content-between p-2 border-light convBtn"}
   >
     <div style={{ fontSize: "0.95rem" }}>
