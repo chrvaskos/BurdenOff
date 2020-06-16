@@ -98,6 +98,7 @@ class Session extends Component {
   handleClick(e) {
     var btnContainer = document.getElementById("session-list");
     var btns = btnContainer.getElementsByClassName("convBtn");
+    sessionStorage.setItem("postId", e.currentTarget.getAttribute("postId"));
     for (var i = 0; i < btns.length; i++) {
       btns[i].addEventListener("click", function () {
         var current = document.getElementsByClassName("active");
@@ -133,6 +134,7 @@ class Session extends Component {
                       title={conv.title}
                       handleClick={this.handleClick}
                       c_id_fk={conv.c_id}
+                      postId={conv.post_id}
                     />
                   ))}
                 </ListGroup>
@@ -192,10 +194,11 @@ class Session extends Component {
   }
 }
 
-const Conv = ({ name, title, handleClick, c_id_fk }) => (
+const Conv = ({ name, title, handleClick, c_id_fk ,postId}) => (
   <ListGroupItem
     as="button"
     c_id_fk={c_id_fk}
+    postId={postId}
     onClick={handleClick}
     className={"d-flex justify-content-between p-2 border-light convBtn"}
   >

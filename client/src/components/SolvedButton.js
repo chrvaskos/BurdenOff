@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col, Button, Modal, Form } from "react-bootstrap";
 
+
+
 function MyVerticallyCenteredModal(props) {
+  
+
+  const [content, setContent] = useState("");
+
   return (
     <Modal
       {...props}
@@ -12,7 +18,7 @@ function MyVerticallyCenteredModal(props) {
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           Are you sure you want to mark this post as solved? <br />
-          This is irreversible.
+          You will be able to change the solution in the future.
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -21,6 +27,9 @@ function MyVerticallyCenteredModal(props) {
             <Form.Label>Please type your solution to this post.</Form.Label>
             <Form.Control
               as="textarea"
+              onChange={(e) => {
+                setContent(e.target.value);              
+              }}
               rows="9"
               placeholder="Type here..."
               required
@@ -28,7 +37,30 @@ function MyVerticallyCenteredModal(props) {
           </Form.Group>
           <Row>
             <Col>
-              <Button variant="success" type="submit">
+              <Button
+                onClick={(e) => {
+                  
+                  var data = {
+                    cont: content,
+                    id: sessionStorage.getItem("postId"),
+                  };
+                  
+                  fetch("/api/putSolution", {
+                    method: "PUT",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    // We convert the React state to JSON and send it as the POST body
+                    body: JSON.stringify(data),
+                  }).then(function (res) {
+                    return res.json();
+                  });
+                  props.onHide();
+                  e.preventDefault();
+                }}
+                variant="success"
+                type="submit"
+              >
                 Add solution
               </Button>
             </Col>

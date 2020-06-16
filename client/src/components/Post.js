@@ -13,6 +13,7 @@ class Post extends Component {
       userArray: [],
       user_two: "",
       title: "",
+      postId:"",
       user_one: sessionStorage.getItem("ID"),
       solved: "1",
       id: "",
@@ -39,6 +40,8 @@ class Post extends Component {
     this.state.user_two = e.target.getAttribute("user_id_fk");
     this.state.title = e.target.getAttribute("title");
     this.state.id = e.target.getAttribute("id");
+    
+
 
     fetch("/api/newConv", {
       method: "POST",
@@ -93,7 +96,7 @@ class Post extends Component {
       <div>
         {this.state.posts.map((post) => (
           <PostCard
-            key={post.id}
+            key={post.id}            
             title={post.title}
             category={post.category}
             content={post.content}

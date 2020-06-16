@@ -83,6 +83,7 @@ router.post("/newExpert", (request, response, next) => {
   });
 
   router.get("/conv/:user_id", async (req, res, next) => {
+
     try {      
       let Results = await db.getConv(req.params.user_id);
       let convArray = Array.from(Results);
@@ -119,6 +120,12 @@ router.post("/newExpert", (request, response, next) => {
        db.updatePost(request.body);
     response.json(db);
   });
+
+  router.put("/putSolution", (request,response,next) =>{    
+    db.putSolution(request.body);
+ response.json(db);
+});
+  
 
 
 

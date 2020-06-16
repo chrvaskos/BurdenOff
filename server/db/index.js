@@ -67,108 +67,137 @@ burdenoff.postPost = (request) => {
 };
 
 burdenoff.postExpert = (request) => {
-    pool.query(
-      `INSERT INTO users (username, password, email, role,bio,expertise,verified) VALUES ('${request.username}', '${request.password}', '${request.email}','${request.role}','${request.bio}','${request.expertise}','${request.verified}')`,
-      (err, result) => {
-        if (err) {
-          throw err
-        }
-  
-        return result;
+  pool.query(
+    `INSERT INTO users (username, password, email, role,bio,expertise,verified) VALUES ('${request.username}', '${request.password}', '${request.email}','${request.role}','${request.bio}','${request.expertise}','${request.verified}')`,
+    (err, result) => {
+      if (err) {
+        throw err;
       }
-    );
-  };
 
-  burdenoff.visiblePosts = (verified) => {
-    return new Promise((resolve, reject) => {
-       
-      if(verified==="1"){
-        pool.query("SELECT * FROM posts" ,(err, results) => {      
-        if (err) {
-          return reject(err);
-        }
-        return resolve(results);
-      });
-    }else{
-      pool.query("SELECT * FROM posts WHERE visibility =  1",(err, results) => {
-      
-        if (err) {
-          return reject(err);
-        }
-        return resolve(results);
-      });
+      return result;
     }
-    });
-  };
-  burdenoff.getReplies = (c_id) => {
-    return new Promise((resolve, reject) => {
-      pool.query("SELECT * FROM conversation_reply WHERE c_id_fk= ?",[c_id], (err, results) => {
+  );
+};
+
+burdenoff.visiblePosts = (verified) => {
+  return new Promise((resolve, reject) => {
+    if (verified === "1") {
+      pool.query("SELECT * FROM posts", (err, results) => {
         if (err) {
           return reject(err);
         }
         return resolve(results);
       });
-    });
-  };
-
-  burdenoff.getConv = (user_id) => {
-    return new Promise((resolve, reject) => {      
-      pool.query("SELECT * FROM conversation WHERE user_one= ? OR user_two= ?",[user_id ,user_id], (err, results) => {
-        if (err) {
-          return reject(err);
+    } else {
+      pool.query(
+        "SELECT * FROM posts WHERE visibility =  1",
+        (err, results) => {
+          if (err) {
+            return reject(err);
+          }
+          return resolve(results);
         }
-        return resolve(results);
-      });
-    });
-  };
-
-  burdenoff.getOne = (id) => {
-    return new Promise((resolve, reject) => {      
-      pool.query("SELECT username FROM users WHERE id= ?",[id], (err, results) => {
-        if (err) {
-          return reject(err);
-        }
-        return resolve(results);
-      });
-    });
-  };
-
-  burdenoff.postReply = (request) => {
+      );
+    }
+  });
+};
+burdenoff.getReplies = (c_id) => {
+  return new Promise((resolve, reject) => {
     pool.query(
-      `INSERT INTO conversation_reply (c_id_fk, reply, time, user_id_fk) VALUES 
+      "SELECT * FROM conversation_reply WHERE c_id_fk= ?",
+      [c_id],
+      (err, results) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(results);
+      }
+    );
+  });
+};
+
+burdenoff.getConv = (user_id) => {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      "SELECT * FROM conversation WHERE user_one= ? OR user_two= ?",
+      [user_id, user_id],
+      (err, results) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(results);
+      }
+    );
+  });
+};
+
+burdenoff.getOne = (id) => {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      "SELECT username FROM users WHERE id= ?",
+      [id],
+      (err, results) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(results);
+      }
+    );
+  });
+};
+
+burdenoff.postReply = (request) => {
+  pool.query(
+    `INSERT INTO conversation_reply (c_id_fk, reply, time, user_id_fk) VALUES 
           ('${request.c_id_fk}', '${request.reply}', '${request.time}', '${request.user_id_fk}')`,
-      (err, result) => {
-        if (err) {
-          throw err;
-        }
-        return result;
+    (err, result) => {
+      if (err) {
+        throw err;
       }
-    );
-  };
+      return result;
+    }
+  );
+};
 
-  burdenoff.postConv = (request) => {
-    pool.query(
-      `INSERT INTO conversation (title, user_one, user_two) VALUES 
-          ('${request.title}', '${request.user_one}', '${request.user_two}')`,
-      (err, result) => {
-        if (err) {
-          throw err;
-        }
-        return result;
+burdenoff.postConv = (request) => {
+  pool.query(
+    `INSERT INTO conversation (title, user_one, user_two,post_id) VALUES 
+          ('${request.title}', '${request.user_one}', '${request.user_two}','${request.id}')`,
+    (err, result) => {
+      if (err) {
+        throw err;
       }
-    );
-  };
+      return result;
+    }
+  );
+};
 
-  burdenoff.updatePost = (request) => {
-    pool.query(
-      "UPDATE posts SET solved= ? , solution='Currently in session' WHERE posts.id= ?",[request.solved,request.id],
-         
-      (err, result) => {
-        if (err) {
-          throw err;
-        }
-        return result;
+burdenoff.updatePost = (request) => {
+  pool.query(
+    "UPDATE posts SET solved= ? , solution='Currently in session' WHERE posts.id= ?",
+    [request.solved, request.id],
+
+    (err, result) => {
+      if (err) {
+        throw err;
       }
-    );
-  };
+      return result;
+    }
+  );
+};
+
+burdenoff.putSolution = (request) => {
+  pool.query(
+    "UPDATE posts SET solution= ? WHERE posts.id= ?",
+    [request.cont, request.id],
+
+    (err, result) => {
+      if (err) {
+        throw err;
+      }
+      return result;
+    }
+  );
+};
+
 module.exports = burdenoff;
