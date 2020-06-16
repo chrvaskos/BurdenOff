@@ -49,7 +49,40 @@
   cursor: pointer;
 }
 
-.active, .convBtn:hover {
+.active,
+.convBtn:hover {
   background-color: rgb(108, 188, 235) !important;
   color: white !important;
+}
+
+.cards-container .card-fix {
+  width: 18rem;
+  height: 18rem;
+}
+
+@media only screen and (max-width: 1200px) {
+  .cards-container .card-fix {
+    margin-left: 0;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .cards-container .card-fix {
+    width: 14rem;
+    height: 20rem;
+    margin: 0;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .cards-container .card-fix {
+    width: 32rem;
+    height: 15rem;
+    margin: 0;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .cards-container .card-fix {
+    width: 25rem;
+    height: 15rem;
+    margin: 0 30px;
+  }
 }

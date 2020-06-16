@@ -89,9 +89,5 @@ const StyledRow = styled.div`
     transition: all 0.3s ease-in;
     -webkit-transition: all 0.3s ease-in;
     -moz-transition: all 0.3s ease-in;
-
-    // &:hover {
-    //   box-shadow: 8px 8px 24px #343a40;
-    // }
   }
 `;

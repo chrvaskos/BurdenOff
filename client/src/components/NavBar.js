@@ -6,17 +6,19 @@ import {
   NavDropdown,
   Button,
   Navbar,
+  Dropdown,
+  DropdownButton,
 } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import { HashLink as NavLink } from "react-router-hash-link";
-
 
 class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      role: sessionStorage.getItem('role'),
-      redirect: false
+      role: sessionStorage.getItem("role"),
+      username: sessionStorage.getItem("username"),
+      redirect: false,
     };
   }
   render() {
@@ -83,18 +85,28 @@ class NavBar extends Component {
                 </NavDropdown>
               </Nav>
               <NavLink to="/session" className="text-light nav-link mx-1">
-                  Session
+                Session
               </NavLink>
-              <Button
-                onClick={() => {
-                  this.setState({ redirect: true });
-                  sessionStorage.clear();
-                }}
-                variant="danger"
-                className="ml-1"
+              <DropdownButton
+                id="dropdown-basic-button"
+                variant="secondary"
+                title={this.state.username + " "}
+                className="px-1"
               >
-                Log Out
-              </Button>
+                <Dropdown.Item>English</Dropdown.Item>
+                <Dropdown.Item>Ελληνικά</Dropdown.Item>
+                <Dropdown.Divider />
+                <Button
+                  onClick={() => {
+                    this.setState({ redirect: true });
+                    sessionStorage.clear();
+                  }}
+                  variant="danger"
+                  className="mx-3 text-center"
+                >
+                  Log Out
+                </Button>
+              </DropdownButton>
             </Navbar.Collapse>
           </Container>
         </Navbar>

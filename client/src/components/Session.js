@@ -9,6 +9,8 @@ import {
   ListGroupItem,
   Card,
 } from "react-bootstrap";
+import { Icon } from "react-icons-kit";
+import {ic_send} from 'react-icons-kit/md/ic_send'
 import "../css/App.css";
 
 class Session extends Component {
@@ -128,7 +130,6 @@ class Session extends Component {
                       key={conv.c_id}
                       name={this.getOtherName(conv.user_one, conv.user_two)}
                       title={conv.title}
-                      colour={"white"}
                       handleClick={this.handleClick}
                       c_id_fk={conv.c_id}
                     />
@@ -171,8 +172,10 @@ class Session extends Component {
                       onClick={this.handleSubmit}
                       variant="primary"
                       type="submit"
+                      className="py-2 px-3"
                     >
                       Send
+                      <Icon icon={ic_send} size="18" className="ml-2"/>
                     </Button>
                   </Col>
                 </Row>
@@ -185,7 +188,7 @@ class Session extends Component {
   }
 }
 
-const Conv = ({ name, title, handleClick, c_id_fk, colour }) => (
+const Conv = ({ name, title, handleClick, c_id_fk }) => (
   <ListGroupItem
     as="button"
     c_id_fk={c_id_fk}

@@ -5,16 +5,16 @@ import { lock } from "react-icons-kit/fa/lock";
 import { university } from "react-icons-kit/fa/university";
 import { graduationCap } from "react-icons-kit/fa/graduationCap";
 import styled from "styled-components";
+import "../css/App.css";
 
 class Cards extends Component {
   render() {
     return (
-      <Container>
+      <Container className="cards-container">
         <StyledRow className="row d-flex">
           <Col md="4" xs="12" className="my-5">
             <Card
-              className="card-transition rounded"
-              style={{ width: "18rem", height: "18rem" }}
+              className="card-transition rounded card-fix"
             >
               <Card.Body>
                 <Card.Title>
@@ -36,8 +36,7 @@ class Cards extends Component {
           </Col>
           <Col md="4" xs="12" className="my-5">
             <Card
-              className="card-transition rounded"
-              style={{ width: "18rem", height: "18rem" }}
+              className="card-transition rounded card-fix"
             >
               <Card.Body>
                 <Card.Title>
@@ -59,8 +58,7 @@ class Cards extends Component {
           </Col>
           <Col md="4" xs="12" className="my-5">
             <Card
-              className="card-transition rounded"
-              style={{ width: "18rem", height: "18rem" }}
+              className="card-transition rounded card-fix"
             >
               <Card.Body>
                 <Card.Title>
@@ -95,13 +93,5 @@ const StyledRow = styled.div`
     transition: all 0.3s ease-in;
     -webkit-transition: all 0.3s ease-in;
     -moz-transition: all 0.3s ease-in;
-
-    // &:hover{
-    // background: #343a40;
-    // color: #fff;
-    // border-radius: 5px;
-    // border: none;
-    // box-shadow: 5px 5px 10px #6c757d;
-    // }
   }
 `;
