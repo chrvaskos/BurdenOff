@@ -31,7 +31,7 @@ class NavBar extends Component {
         return <Redirect to="/" />;
       }
     }
-    if (this.state.role !== "0") {
+    if (this.state.role === "1" || this.state.role==="2" || this.state.role==="3") {
       return (
         <Navbar variant="dark" bg="dark" expand="lg">
           <Container>
