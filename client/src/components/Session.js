@@ -96,8 +96,10 @@ class Session extends Component {
     // ... submit to API o  r something
   }
   handleClick(e) {
+    console.log("eimai edw ")
     var btnContainer = document.getElementById("session-list");
     var btns = btnContainer.getElementsByClassName("convBtn");
+    
     sessionStorage.setItem("postId", e.currentTarget.getAttribute("postId"));
     for (var i = 0; i < btns.length; i++) {
       btns[i].addEventListener("click", function () {
@@ -171,7 +173,7 @@ class Session extends Component {
                 </Form.Group>
                 <Row>
                 <Col className="d-flex justify-content-start">
-                    <SolvedButton/>
+                    <SolvedButton />
                   </Col>
                   <Col className="d-flex justify-content-end">
                     <Button
@@ -199,7 +201,7 @@ const Conv = ({ name, title, handleClick, c_id_fk ,postId}) => (
     as="button"
     c_id_fk={c_id_fk}
     postId={postId}
-    onClick={()=>handleClick}
+    onClick={handleClick}
     className={"d-flex justify-content-between p-2 border-light convBtn"}
   >
     <div style={{ fontSize: "0.95rem" }}>

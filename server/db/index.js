@@ -42,7 +42,7 @@ burdenoff.allUsers = () => {
 
 burdenoff.postUser = (request) => {
   pool.query(
-    `INSERT INTO users (username, password, email, role,verified) VALUES ('${request.username}', '${request.password}', '${request.email}','${request.role}',${request.verified})`,
+    `INSERT INTO users (username, password, email, role,verified) VALUES ('${request.username}', '${request.password}', '${request.email}','${request.role}','0')`,
     (err, result) => {
       if (err) {
         throw err;
@@ -68,7 +68,7 @@ burdenoff.postPost = (request) => {
 
 burdenoff.postExpert = (request) => {
   pool.query(
-    `INSERT INTO users (username, password, email, role,bio,expertise,verified) VALUES ('${request.username}', '${request.password}', '${request.email}','${request.role}','${request.bio}','${request.expertise}','${request.verified}')`,
+    `INSERT INTO users (username, password, email, role,bio,expertise,verified) VALUES ('${request.username}', '${request.password}', '${request.email}','${request.role}','${request.bio}','${request.expertise}','0')`,
     (err, result) => {
       if (err) {
         throw err;

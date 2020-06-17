@@ -79,8 +79,8 @@ function MyVerticallyCenteredModal(props) {
 
 function SolvedButton() {
   const [modalShow, setModalShow] = React.useState(false);
-
-  return (
+if(sessionStorage.getItem("verified")==="1")
+ { return (
     <>
       <Button variant="success" onClick={() => setModalShow(true)}>
         Mark as solved
@@ -91,7 +91,7 @@ function SolvedButton() {
         onHide={() => setModalShow(false)}
       />
     </>
-  );
+  );}else return null;
 }
 
 export default SolvedButton;

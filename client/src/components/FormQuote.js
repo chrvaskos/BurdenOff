@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Button, Col, Row, Form } from "react-bootstrap";
+import { Container, Button, Col, Row, Form, Alert } from "react-bootstrap";
 import styled from "styled-components";
 import { Redirect } from "react-router-dom";
 
@@ -10,6 +10,8 @@ class FormQuote extends Component {
       role: "1",
       redirect: false,
       sessionRole: sessionStorage.getItem("role"),
+      visible:false,
+      alertMessage:"",
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -17,9 +19,16 @@ class FormQuote extends Component {
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  componentDidMount() {
+    fetch(`/api/users`)
+      .then((res) => res.json())
+      .then((userArray) => this.setState({ userArray }));
+  }
   handleUsernameChange(e) {
     this.setState({ username: e.target.value });
   }
+  
 
   handleEmailChange(e) {
     this.setState({ email: e.target.value });
@@ -29,6 +38,19 @@ class FormQuote extends Component {
     this.setState({ password: e.target.value });
   }
   handleSubmit(e) {
+    for (let i = 0; i < this.state.userArray.length; i++) {
+      if (this.state.userArray[i].username === this.state.username) {
+        this.state.alertMessage="This username already exists!"
+        this.setState({ visible: true });
+        e.preventDefault();
+        return null;
+      }else if( this.state.userArray[i].email === this.state.email){
+        this.state.alertMessage="An account with this email already exists!"
+        this.setState({ visible: true });
+        e.preventDefault();
+        return null;
+      }
+    }
     fetch("/api/newUser", {
       method: "POST",
       headers: {
@@ -134,6 +156,11 @@ class FormQuote extends Component {
                     Sign Up Now!
                   </Button>
                 </Col>
+              </Row>
+              <Row className="d-flex justify-content-center align-items-center">
+              <Alert variant="danger" show={this.state.visible} className="mt-2">
+              {this.state.alertMessage}
+            </Alert>
               </Row>
             </Container>
           </Form>

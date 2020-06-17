@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Form, Button, Row, Col } from "react-bootstrap";
+import { Container, Form, Button, Row, Col, Alert } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 
 class LoginForm extends Component {
@@ -9,6 +9,7 @@ class LoginForm extends Component {
       userArray: [],
       passwordArray: [],
       redirect: false,
+      visible:false ,
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -57,7 +58,7 @@ class LoginForm extends Component {
                 );
 
                 this.setState({ redirect: true });
-              } else console.log("We out");
+              } else this.setState({ visible: true });
             }.bind(this)
           );
       }
@@ -107,6 +108,9 @@ class LoginForm extends Component {
             >
               Login
             </Button>
+            <Alert variant="danger" show={this.state.visible} className="mt-2">
+              Username or password is incorrect!
+            </Alert>
           </Form>
           <Col
             className="align-self-center d-inline border my-5"

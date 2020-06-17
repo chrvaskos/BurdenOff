@@ -14,6 +14,7 @@ class JoinForm extends Component {
     super(props);
     this.state = {
       role: "1",
+      alertMessage: "Something went wrong!",
       verified: "0",
       redirect: false,
       userArray: [],
@@ -46,10 +47,13 @@ class JoinForm extends Component {
 
   handleSubmit(e) {
     for (let i = 0; i < this.state.userArray.length; i++) {
-      if (
-        this.state.userArray[i].username === this.state.username ||
-        this.state.userArray[i].email === this.state.email
-      ) {
+      if (this.state.userArray[i].username === this.state.username) {
+        this.state.alertMessage="This username already exists!"
+        this.setState({ visible: true });
+        e.preventDefault();
+        return null;
+      }else if( this.state.userArray[i].email === this.state.email){
+        this.state.alertMessage="An account with this email already exists!"
         this.setState({ visible: true });
         e.preventDefault();
         return null;
@@ -140,7 +144,7 @@ class JoinForm extends Component {
               Sign Up
             </Button>
             <Alert variant="danger" show={this.state.visible} className="mt-2">
-              This username or email already exists.
+              {this.state.alertMessage}
             </Alert>
           </Form>
         </Container>

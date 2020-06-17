@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Form, Button, Row, InputGroup } from "react-bootstrap";
+import { Container, Form, Button, Row, InputGroup ,Alert} from "react-bootstrap";
 import { Redirect } from 'react-router-dom';
 
 class ExpertJoinForm extends Component {
@@ -8,7 +8,10 @@ class ExpertJoinForm extends Component {
     this.state = {
       role: "2",
       redirect: false,
-      verified: "0"
+      verified: "0",
+      alertMessage:"Something went wrong",
+      visible:false,
+      userArray:[],
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -17,6 +20,12 @@ class ExpertJoinForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleExpertiseChange = this.handleExpertiseChange.bind(this);
     this.handleBioChange = this.handleBioChange.bind(this);
+  }
+
+  componentDidMount() {
+    fetch(`/api/users`)
+      .then((res) => res.json())
+      .then((userArray) => this.setState({ userArray }));
   }
   handleUsernameChange(e) {
     this.setState({ username: e.target.value });
@@ -38,6 +47,21 @@ class ExpertJoinForm extends Component {
   }
 
   handleSubmit(e) {
+    for (let i = 0; i < this.state.userArray.length; i++) {
+      if (this.state.userArray[i].username === this.state.username) {
+        this.state.alertMessage="This username already exists!"
+        this.setState({ visible: true });
+        e.preventDefault();
+        return null;
+      }else if( this.state.userArray[i].email === this.state.email){
+        this.state.alertMessage="An account with this email already exists!"
+        this.setState({ visible: true });
+        e.preventDefault();
+        return null;
+      }
+    }
+
+
     fetch("/api/newExpert", {
       method: "POST",
       headers: {
@@ -147,6 +171,9 @@ class ExpertJoinForm extends Component {
             >
               Sign Up as an Expert
             </Button>
+            <Alert variant="danger" show={this.state.visible} className="mt-2">
+              {this.state.alertMessage}
+            </Alert>
           </Form>
         </Container>
       </Row>
