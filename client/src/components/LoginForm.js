@@ -61,7 +61,7 @@ class LoginForm extends Component {
               } else this.setState({ visible: true });
             }.bind(this)
           );
-      }
+      } else this.setState({ visible: true });
 
       // if res == true, password matched
       // else wrong password
