@@ -6,7 +6,7 @@ import {
   Button,
   Row,
   InputGroup,
-  
+  Alert,
 } from "react-bootstrap";
 
 class JoinForm extends Component {
@@ -17,6 +17,7 @@ class JoinForm extends Component {
       verified: "0",
       redirect: false,
       userArray: [],
+      visible: false,
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -30,6 +31,7 @@ class JoinForm extends Component {
       .then((res) => res.json())
       .then((userArray) => this.setState({ userArray }));
   }
+
   handleUsernameChange(e) {
     this.setState({ username: e.target.value });
   }
@@ -41,13 +43,16 @@ class JoinForm extends Component {
   handlePasswordChange(e) {
     this.setState({ password: e.target.value });
   }
+
   handleSubmit(e) {
     for (let i = 0; i < this.state.userArray.length; i++) {
       if (
         this.state.userArray[i].username === this.state.username ||
         this.state.userArray[i].email === this.state.email
       ) {
-        return alert("Hello! I am a beautiful alert box!!");
+        this.setState({ visible: true });
+        e.preventDefault();
+        return null;
       }
     }
 
@@ -60,7 +65,6 @@ class JoinForm extends Component {
       body: JSON.stringify(this.state),
     }).then(
       function (res) {
-        console.log(res);
         this.setState({ redirect: true });
         return res.json();
       }.bind(this)
@@ -135,6 +139,9 @@ class JoinForm extends Component {
             >
               Sign Up
             </Button>
+            <Alert variant="danger" show={this.state.visible} className="mt-2">
+              This username or email already exists.
+            </Alert>
           </Form>
         </Container>
       </Row>
