@@ -37,6 +37,7 @@ router.post("/newUser", (request, response, next) => {
   });
 });
 router.post("/login", (request, response, next) => {
+  
   bcrypt.compare(request.body[0], request.body[1], function (err, res) {
     if (err) throw err;
     if (res) response.send("Success");

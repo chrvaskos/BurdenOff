@@ -9,12 +9,16 @@ class LoginForm extends Component {
       userArray: [],
       passwordArray: [],
       redirect: false,
-      visible:false ,
+      visible: false,
+      count: 0,
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    fetch("/api/users")
+      .then((res) => res.json())
+      .then((userArray) => this.setState({ userArray }));
   }
   handleUsernameChange(e) {
     this.setState({ username: e.target.value });
@@ -24,9 +28,6 @@ class LoginForm extends Component {
     this.setState({ password: e.target.value });
   }
   handleSubmit(e) {
-    fetch("/api/users")
-      .then((res) => res.json())
-      .then((userArray) => this.setState({ userArray }));
     for (let i = 0; i < this.state.userArray.length; i++) {
       if (this.state.username == this.state.userArray[i].username) {
         this.state.passwordArray[0] = this.state.password;
@@ -45,7 +46,6 @@ class LoginForm extends Component {
           .then(
             function (matched) {
               if (matched == "Success") {
-                console.log("We in");
                 sessionStorage.setItem(
                   "username",
                   this.state.userArray[i].username
@@ -58,15 +58,20 @@ class LoginForm extends Component {
                 );
 
                 this.setState({ redirect: true });
-              } else this.setState({ visible: true });
+              } else {
+                this.setState({ visible: true });
+              }
             }.bind(this)
           );
-      } else this.setState({ visible: true });
+      } else {
+        this.state.count++;
+      }
 
       // if res == true, password matched
       // else wrong password
-    }
-
+    }    
+    if (this.state.userArray.length === this.state.count)
+      this.setState({ visible: true });
     e.preventDefault();
     // ... submit to API o  r something
   }
