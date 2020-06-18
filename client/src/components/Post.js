@@ -117,7 +117,7 @@ class Post extends Component {
       this.state.posts = this.state.postArray;
     } else {
       for (let i = 0; i < this.state.postArray.length; i++) {
-        if (this.state.postArray[i].category === parseInt(currentKey)) {
+        if (this.state.postArray[i].category === currentKey) {
           this.state.posts.push(this.state.postArray[i]);
         }
       }

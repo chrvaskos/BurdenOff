@@ -28,7 +28,7 @@ class Jumbotrons extends Component {
             className="d-flex justify-content-center align-items-center"
           >
             <Image
-              src={require("../images/experts.jpg")}
+              src={require("../images/quill.jpg")}
               roundedCircle
               className="imageStyle mb-2"
             />
@@ -60,7 +60,7 @@ class Jumbotrons extends Component {
             className="d-flex justify-content-center align-items-center order-md-1"
           >
             <Image
-              src={require("../images/dudes.jpg")}
+              src={require("../images/star.jpg")}
               roundedCircle
               className="imageStyle my-2"
             />
@@ -77,6 +77,7 @@ const StyledRow = styled.div`
   .imageStyle {
     width: 19rem;
     height: 19rem;
+    object-fit: cover;
     border: 2px solid #343a40;
     box-shadow: 0 0 6px #343a40;
     transition: all 0.3s ease-in;

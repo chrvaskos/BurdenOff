@@ -18,10 +18,11 @@ function PostMenu() {
       }}
     >
       <Tab eventKey="All" title="All Posts"></Tab>
-      <Tab eventKey={1} title="Category 1"></Tab>
-      <Tab eventKey={2} title="Category 2"></Tab>
-      <Tab eventKey={3} title="Category 3"></Tab>
-      <Tab eventKey={4} title="Category 4"></Tab>
+      <Tab eventKey={"Anxiety"} title="Anxiety"></Tab>
+      <Tab eventKey={"Depression"} title="Depression"></Tab>
+      <Tab eventKey={"Family"} title="Family"></Tab>
+      <Tab eventKey={"Relationships"} title="Relationships"></Tab>
+      <Tab eventKey={"Other"} title="Other"></Tab>
     </Tabs>
   );
 }

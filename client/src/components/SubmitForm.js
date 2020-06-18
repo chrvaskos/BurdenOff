@@ -83,10 +83,11 @@ class SubmitForm extends Component {
                   <option selected hidden>
                     Choose Category
                   </option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
+                  <option>Anxiety</option>
+                  <option>Depression</option>
+                  <option>Family</option>
+                  <option>Relationships</option>
+                  <option>Other</option>
                 </Form.Control>
               </Form.Group>
               <Form.Group md="4" controlId="validationCustom01">
