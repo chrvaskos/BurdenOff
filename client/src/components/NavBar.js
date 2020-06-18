@@ -31,7 +31,7 @@ class NavBar extends Component {
         return <Redirect to="/" />;
       }
     }
-    if (this.state.role === "1" || this.state.role==="2" || this.state.role==="3") {
+    if (this.state.role === "1" || this.state.role === "2") {
       return (
         <Navbar variant="dark" bg="dark" expand="lg">
           <Container>
@@ -84,7 +84,90 @@ class NavBar extends Component {
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav>
-              <NavLink to="/session" className="text-light nav-link mx-1">
+              <NavLink to="/session" className="text-light nav-link mr-2">
+                Session
+              </NavLink>
+              <DropdownButton
+                id="dropdown-basic-button"
+                variant="secondary"
+                title={this.state.username + " "}
+                className="px-1"
+              >
+                <Dropdown.Item>English</Dropdown.Item>
+                <Dropdown.Item>Ελληνικά</Dropdown.Item>
+                <Dropdown.Divider />
+                <Button
+                  onClick={() => {
+                    this.setState({ redirect: true });
+                    sessionStorage.clear();
+                  }}
+                  variant="danger"
+                  className="mx-3 text-center"
+                >
+                  Log Out
+                </Button>
+              </DropdownButton>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+      );
+    } else if (this.state.role === "3") {
+      return (
+        <Navbar variant="dark" bg="dark" expand="lg">
+          <Container>
+            <Link to="/">
+              <Navbar.Brand>Logo</Navbar.Brand>
+            </Link>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto">
+                <NavLink to="/posts" className="text-light nav-link mx-1">
+                  Posts
+                </NavLink>
+                <NavLink to="/faq" className="text-light nav-link mx-1">
+                  FAAAAAAAAAAAAAAAAAAQ
+                </NavLink>
+                <NavDropdown
+                  title={
+                    <span className="text-light my-auto">Useful Links</span>
+                  }
+                  id="basic-nav-dropdown"
+                  className="mx-1"
+                >
+                  <NavDropdown.Item>
+                    <NavLink
+                      to="/useful-links"
+                      style={{ textDecoration: "none", color: "#343a40" }}
+                    >
+                      All Info
+                    </NavLink>
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item>
+                    <NavLink
+                      to="/useful-links#sites"
+                      style={{
+                        textDecoration: "none",
+                        color: "#343a40",
+                      }}
+                    >
+                      Websites
+                    </NavLink>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <NavLink
+                      to="/useful-links#numbers"
+                      style={{ textDecoration: "none", color: "#343a40" }}
+                    >
+                      Telephone Numbers
+                    </NavLink>
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+              <NavLink to="/admin" className="text-success nav-link">
+                Admin
+              </NavLink>
+              <NavLink to="/session" className="text-light nav-link mr-2">
                 Session
               </NavLink>
               <DropdownButton

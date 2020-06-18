@@ -43,7 +43,7 @@ class Hero extends Component {
             </p>
             <Link to="/join">
               <Button size="lg" variant="warning" className="ml-1">
-                Sign Up Free
+                Sign Up Now
               </Button>
             </Link>
           </Container>

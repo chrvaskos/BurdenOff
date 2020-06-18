@@ -69,7 +69,7 @@ class LoginForm extends Component {
 
       // if res == true, password matched
       // else wrong password
-    }    
+    }
     if (this.state.userArray.length === this.state.count)
       this.setState({ visible: true });
     e.preventDefault();

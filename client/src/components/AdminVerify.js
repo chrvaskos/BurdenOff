@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Button, Table } from "react-bootstrap";
 import "../css/App.css";
+import { Redirect } from "react-router-dom";
 
 class AdminVerify extends Component {
   constructor() {
@@ -16,6 +17,9 @@ class AdminVerify extends Component {
   }
 
   render() {
+    if(sessionStorage.getItem("role")!== "3"){
+      return <Redirect to="/" />;
+    }else
     return (
       <Container className="verify-experts-container">
         <h3 className="text-center my-3">Verify Experts</h3>
