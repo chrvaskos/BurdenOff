@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 import ScrollToTop from "./components/ScrollToTop";
+import "./css/Fonts.css";
 
 ReactDOM.render(
   <Router>

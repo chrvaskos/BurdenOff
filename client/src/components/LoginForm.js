@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Container, Form, Button, Row, Col, Alert } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Button,
+  Row,
+  Col,
+  Alert,
+  Image,
+} from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 
 class LoginForm extends Component {
@@ -83,9 +91,19 @@ class LoginForm extends Component {
     }
     return (
       <Row className="py-5">
-        <Container className="d-flex flex-column my-3">
-          <h1 className="align-self-center mb-5">Logo</h1>
-          <Form className="align-self-center" onSubmit={this.handleSubmit} style={{ width: 300 }}>
+        <Container className="d-flex flex-column my-3 login-container">
+          <h1 className="align-self-center mb-5">
+            <Image
+              src={require("../images/twitterlogo.png")}
+              roundedCircle
+              className="login-logo-image"
+            />
+          </h1>
+          <Form
+            className="align-self-center"
+            onSubmit={this.handleSubmit}
+            style={{ width: 300 }}
+          >
             <Form.Group controlId="validationCustomUsername">
               <Form.Label>Username</Form.Label>
               <Form.Control
@@ -107,11 +125,7 @@ class LoginForm extends Component {
             <Form.Group controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="Remember me" />
             </Form.Group>
-            <Button
-              variant="primary"
-              type="submit"
-              style={{ width: 300 }}
-            >
+            <Button variant="primary" type="submit" style={{ width: 300 }}>
               Login
             </Button>
             <Alert variant="danger" show={this.state.visible} className="mt-2">

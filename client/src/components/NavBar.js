@@ -34,9 +34,15 @@ class NavBar extends Component {
     if (this.state.role === "1" || this.state.role === "2") {
       return (
         <Navbar variant="dark" bg="dark" expand="lg">
-          <Container>
+          <Container className="nav-container">
             <Link to="/">
-              <Navbar.Brand>Logo</Navbar.Brand>
+              <Navbar.Brand>
+                <Image
+                  src={require("../images/twitterlogo.png")}
+                  roundedCircle
+                  className="nav-logo-image"
+                />
+              </Navbar.Brand>
             </Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -114,9 +120,15 @@ class NavBar extends Component {
     } else if (this.state.role === "3") {
       return (
         <Navbar variant="dark" bg="dark" expand="lg">
-          <Container>
+          <Container className="nav-container">
             <Link to="/">
-              <Navbar.Brand>Logo</Navbar.Brand>
+              <Navbar.Brand>
+                <Image
+                  src={require("../images/twitterlogo.png")}
+                  roundedCircle
+                  className="nav-logo-image"
+                />
+              </Navbar.Brand>
             </Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -197,9 +209,15 @@ class NavBar extends Component {
     } else {
       return (
         <Navbar variant="dark" bg="dark" expand="lg">
-          <Container>
+          <Container className="nav-container">
             <Link to="/">
-              <Navbar.Brand>Logo</Navbar.Brand>
+              <Navbar.Brand>
+                <Image
+                  src={require("../images/twitterlogo.png")}
+                  roundedCircle
+                  className="nav-logo-image"
+                />
+              </Navbar.Brand>
             </Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
