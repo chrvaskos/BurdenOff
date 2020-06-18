@@ -161,7 +161,7 @@ class Session extends Component {
                   </ListGroup>
                 </Col>
               </Col>
-              <Form className="my-3">
+              <Form onSubmit={this.handleSubmit} className="my-3">
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                   <Form.Control
                     onChange={this.handleMessageChange}
@@ -177,7 +177,6 @@ class Session extends Component {
                   </Col>
                   <Col className="d-flex justify-content-end">
                     <Button
-                      onClick={this.handleSubmit}
                       variant="primary"
                       type="submit"
                       className="py-2 px-3"

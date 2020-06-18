@@ -10,8 +10,8 @@ class FormQuote extends Component {
       role: "1",
       redirect: false,
       sessionRole: sessionStorage.getItem("role"),
-      visible:false,
-      alertMessage:"",
+      visible: false,
+      alertMessage: "",
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -21,14 +21,13 @@ class FormQuote extends Component {
   }
 
   componentDidMount() {
-    fetch(`/api/users`)
+    fetch(`/api/emailusername`)
       .then((res) => res.json())
       .then((userArray) => this.setState({ userArray }));
   }
   handleUsernameChange(e) {
     this.setState({ username: e.target.value });
   }
-  
 
   handleEmailChange(e) {
     this.setState({ email: e.target.value });
@@ -40,12 +39,12 @@ class FormQuote extends Component {
   handleSubmit(e) {
     for (let i = 0; i < this.state.userArray.length; i++) {
       if (this.state.userArray[i].username === this.state.username) {
-        this.state.alertMessage="This username already exists!"
+        this.state.alertMessage = "This username already exists!";
         this.setState({ visible: true });
         e.preventDefault();
         return null;
-      }else if( this.state.userArray[i].email === this.state.email){
-        this.state.alertMessage="An account with this email already exists!"
+      } else if (this.state.userArray[i].email === this.state.email) {
+        this.state.alertMessage = "An account with this email already exists!";
         this.setState({ visible: true });
         e.preventDefault();
         return null;
@@ -106,7 +105,7 @@ class FormQuote extends Component {
               </Row>
             </blockquote>
           </Container>
-          <Form className="mb-5">
+          <Form onSubmit={this.handleSubmit} className="mb-5">
             <Container>
               <Row>
                 <Col xs="12" md="3">
@@ -147,20 +146,19 @@ class FormQuote extends Component {
                   md="3"
                   className="d-flex flex-column justify-content-center align-content-center"
                 >
-                  <Button
-                    onClick={this.handleSubmit}
-                    className="mt-3"
-                    variant="warning"
-                    type="submit"
-                  >
+                  <Button className="mt-3" variant="warning" type="submit">
                     Sign Up Now!
                   </Button>
                 </Col>
               </Row>
               <Row className="d-flex justify-content-center align-items-center">
-              <Alert variant="danger" show={this.state.visible} className="mt-2">
-              {this.state.alertMessage}
-            </Alert>
+                <Alert
+                  variant="danger"
+                  show={this.state.visible}
+                  className="mt-2"
+                >
+                  {this.state.alertMessage}
+                </Alert>
               </Row>
             </Container>
           </Form>

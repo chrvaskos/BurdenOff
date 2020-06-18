@@ -2,41 +2,78 @@ import React, { Component } from "react";
 import { InputGroup, FormControl } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Icon } from "react-icons-kit";
-import {ic_create} from 'react-icons-kit/md/ic_create'
-import {smallRight} from 'react-icons-kit/entypo/smallRight'
+import { ic_create } from "react-icons-kit/md/ic_create";
+import { smallRight } from "react-icons-kit/entypo/smallRight";
 import styled from "styled-components";
 
 class CreatePost extends Component {
   render() {
-    return (
-      <StyledDiv>
-        <InputGroup
-          size="lg"
-          className="mt-3 mb-4 mx-1"
-          style={{ cursor: "default" }}
-        >
-          <InputGroup.Prepend>
-            <InputGroup.Text
-              id="inputGroup-sizing-lg m-0"
-              style={{ fontSize: "1.05rem" }}
-            >
-              <Icon icon={ic_create} size="20" className="mr-1 mb-1"/>
-              Post
-              <Icon icon={smallRight} size="26" className="ml-3"/>
-            </InputGroup.Text>
-          </InputGroup.Prepend>
-          <Link to="/submit" className="text-decoration-none">
-            <FormControl
-              aria-label="Large"
-              aria-describedby="inputGroup-sizing-sm"
-              placeholder="Click here to create a post!"
-              className="widthControl"
-              style={{ fontSize: "1.05rem" }}
-            />
-          </Link>
-        </InputGroup>
-      </StyledDiv>
-    );
+    if (
+      sessionStorage.getItem("role") === "1" ||
+      sessionStorage.getItem("role") === "2" ||
+      sessionStorage.getItem("role") === "3"
+    ) {
+      return (
+        <StyledDiv>
+          <InputGroup
+            size="lg"
+            className="mt-3 mb-4 mx-1"
+            style={{ cursor: "default" }}
+          >
+            <InputGroup.Prepend>
+              <InputGroup.Text
+                id="inputGroup-sizing-lg m-0"
+                style={{ fontSize: "1.05rem" }}
+              >
+                <Icon icon={ic_create} size="20" className="mr-1 mb-1" />
+                Post
+                <Icon icon={smallRight} size="26" className="ml-3" />
+              </InputGroup.Text>
+            </InputGroup.Prepend>
+            <Link to="/submit" className="text-decoration-none">
+              <FormControl
+                aria-label="Large"
+                aria-describedby="inputGroup-sizing-sm"
+                placeholder="Click here to create a post!"
+                className="widthControl"
+                style={{ fontSize: "1.05rem" }}
+              />
+            </Link>
+          </InputGroup>
+        </StyledDiv>
+      );
+    } else {
+      return (
+        <StyledDiv>
+          <InputGroup
+            size="lg"
+            className="mt-3 mb-4 mx-1"
+            style={{ cursor: "default" }}
+          >
+            <InputGroup.Prepend>
+              <InputGroup.Text
+                id="inputGroup-sizing-lg m-0"
+                style={{ fontSize: "1.05rem" }}
+              >
+                <Icon icon={ic_create} size="20" className="mr-1 mb-1" />
+                Post
+                <Icon icon={smallRight} size="26" className="ml-3" />
+              </InputGroup.Text>
+            </InputGroup.Prepend>
+            <Link to="/join" className="text-decoration-none">
+              <FormControl
+                aria-label="Large"
+                aria-describedby="inputGroup-sizing-sm"
+                placeholder="Sign Up to create a post!"
+                className="widthControl"
+                style={{ fontSize: "1.05rem" }}
+                disabled
+              />
+            </Link>
+          </InputGroup>
+        </StyledDiv>
+      );
+    }
   }
 }
 

@@ -85,13 +85,14 @@ class LoginForm extends Component {
       <Row className="py-5">
         <Container className="d-flex flex-column my-3">
           <h1 className="align-self-center mb-5">Logo</h1>
-          <Form className="align-self-center" style={{ width: 300 }}>
+          <Form className="align-self-center" onSubmit={this.handleSubmit} style={{ width: 300 }}>
             <Form.Group controlId="validationCustomUsername">
               <Form.Label>Username</Form.Label>
               <Form.Control
                 type="text"
                 onChange={this.handleUsernameChange}
                 placeholder="Username"
+                required
               />
             </Form.Group>
             <Form.Group controlId="formBasicPassword">
@@ -100,6 +101,7 @@ class LoginForm extends Component {
                 type="password"
                 onChange={this.handlePasswordChange}
                 placeholder="Password"
+                required
               />
             </Form.Group>
             <Form.Group controlId="formBasicCheckbox">
@@ -107,7 +109,6 @@ class LoginForm extends Component {
             </Form.Group>
             <Button
               variant="primary"
-              onClick={this.handleSubmit}
               type="submit"
               style={{ width: 300 }}
             >

@@ -28,7 +28,7 @@ class JoinForm extends Component {
   }
 
   componentDidMount() {
-    fetch(`/api/users`)
+    fetch(`/api/emailusername`)
       .then((res) => res.json())
       .then((userArray) => this.setState({ userArray }));
   }
@@ -48,12 +48,12 @@ class JoinForm extends Component {
   handleSubmit(e) {
     for (let i = 0; i < this.state.userArray.length; i++) {
       if (this.state.userArray[i].username === this.state.username) {
-        this.state.alertMessage="This username already exists!"
+        this.state.alertMessage = "This username already exists!";
         this.setState({ visible: true });
         e.preventDefault();
         return null;
-      }else if( this.state.userArray[i].email === this.state.email){
-        this.state.alertMessage="An account with this email already exists!"
+      } else if (this.state.userArray[i].email === this.state.email) {
+        this.state.alertMessage = "An account with this email already exists!";
         this.setState({ visible: true });
         e.preventDefault();
         return null;
@@ -87,7 +87,11 @@ class JoinForm extends Component {
         <Container className="d-flex flex-column mt-2 mb-5">
           <p className="align-self-center mb-2">Join Burden Off</p>
           <h1 className="align-self-center mb-5">Create your account</h1>
-          <Form className="align-self-center" style={{ width: 450 }}>
+          <Form
+            className="align-self-center"
+            style={{ width: 450 }}
+            onSubmit={this.handleSubmit}
+          >
             <Form.Group controlId="validationCustomUsername">
               <Form.Label>Username</Form.Label>
               <InputGroup>
@@ -135,12 +139,7 @@ class JoinForm extends Component {
                 label="By creating an account, you agree to the Terms of Service. "
               />
             </Form.Group>
-            <Button
-              variant="warning"
-              type="submit"
-              onClick={this.handleSubmit}
-              style={{ width: 450 }}
-            >
+            <Button variant="warning" type="submit" style={{ width: 450 }}>
               Sign Up
             </Button>
             <Alert variant="danger" show={this.state.visible} className="mt-2">

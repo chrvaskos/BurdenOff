@@ -241,4 +241,18 @@ burdenoff.updateVerify = (request) => {
   );
 };
 
+burdenoff.getEmailUsername = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      "SELECT email,username FROM users ",      
+      (err, results) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(results);
+      }
+    );
+  });
+};
+
 module.exports = burdenoff;

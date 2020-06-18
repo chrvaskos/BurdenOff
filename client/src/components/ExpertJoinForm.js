@@ -23,7 +23,7 @@ class ExpertJoinForm extends Component {
   }
 
   componentDidMount() {
-    fetch(`/api/users`)
+    fetch(`/api/emailusername`)
       .then((res) => res.json())
       .then((userArray) => this.setState({ userArray }));
   }
@@ -90,7 +90,7 @@ class ExpertJoinForm extends Component {
         <Container className="d-flex flex-column mb-2">
           <p className="align-self-center mb-2">Join Burden Off</p>
           <h1 className="align-self-center mb-5">Create your account</h1>
-          <Form className="align-self-center" style={{ width: 450 }}>
+          <Form className="align-self-center" onSubmit={this.handleSubmit} style={{ width: 450 }}>
             <Form.Group controlId="validationCustomUsername">
               <Form.Label>Username</Form.Label>
               <InputGroup>
@@ -133,6 +133,7 @@ class ExpertJoinForm extends Component {
                 onChange={this.handleExpertiseChange}
                 as="select"
                 custom
+                required
               >
                 <option value="" disabled selected hidden>
                   Select your expertise
@@ -155,6 +156,7 @@ class ExpertJoinForm extends Component {
                 as="textarea"
                 rows="3"
                 placeholder="Tell us why would you like to join us!"
+                required
               />
             </Form.Group>
             <Form.Group controlId="formBasicCheckbox" className="mt-5">
@@ -164,7 +166,6 @@ class ExpertJoinForm extends Component {
               />
             </Form.Group>
             <Button
-              onClick={this.handleSubmit}
               variant="warning"
               type="submit"
               style={{ width: 450 }}

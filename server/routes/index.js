@@ -30,7 +30,7 @@ router.get("/users", async (req, res, next) => {
 router.post("/newUser", (request, response, next) => {
   let password = request.body.password;
   bcrypt.hash(password, saltRounds, (err, hash) => {
-    if (err) throw err;
+    if (err) return err;
     request.body.password = hash;
     db.postUser(request.body);
     response.json(db);
@@ -39,13 +39,13 @@ router.post("/newUser", (request, response, next) => {
 router.post("/login", (request, response, next) => {
   
   bcrypt.compare(request.body[0], request.body[1], function (err, res) {
-    if (err) throw err;
+    if (err) return err;
     if (res) response.send("Success");
     else response.send("Failure");
   });
 });
 
-router.post("/newPost", (request, response, next) => {
+router.post("/newPost", (request, response, next) => {  
   request.body.visibility = false ? 0 : 1;
   db.postPost(request.body);
   response.json(db);
@@ -54,7 +54,7 @@ router.post("/newPost", (request, response, next) => {
 router.post("/newExpert", (request, response, next) => {
     let password = request.body.password;
     bcrypt.hash(password, saltRounds, (err, hash) => {
-      if (err) throw err;
+      if (err) return err;
       request.body.password = hash;
       db.postExpert(request.body);
       response.json(db);
@@ -152,6 +152,17 @@ router.put("/putVerify", (request,response,next) =>{
   }
   db.updateVerify(request.body);
 response.json(db);
+});
+
+router.get("/emailusername", async (req, res, next) => {
+  try {      
+    let Results = await db.getEmailUsername();
+    let expertArray = Array.from(Results);      
+    res.json(expertArray);           
+  } catch (e) {
+    console.log(e);
+    res.sentStatus(500);
+  }
 });
 
 

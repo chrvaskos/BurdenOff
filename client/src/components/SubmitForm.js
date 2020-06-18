@@ -68,10 +68,10 @@ class SubmitForm extends Component {
       <Container className="d-flex flex-column justify-content-center align-items-center my-3">
         <CenterContent>
           <h1 className="mx-1 mt-2">Create a post</h1>
-          <Form className="mx-1 my-4">
+          <Form onSubmit={this.handleSubmit} className="mx-1 my-4">
             <Form.Group controlId="exampleForm.ControlSelect1">
               <Form.Label>Category</Form.Label>
-              <Form.Control onChange={this.handleCategoryChange} as="select">
+              <Form.Control onChange={this.handleCategoryChange} as="select" required>
                 <option selected hidden>
                   Choose Category
                 </option>
@@ -86,7 +86,8 @@ class SubmitForm extends Component {
               <Form.Control
                 onChange={this.handleTitleChange}
                 type="text"
-                placeholder="Title (optional)"
+                placeholder="Title"
+                required
               />
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
@@ -111,7 +112,7 @@ class SubmitForm extends Component {
                 </Form.Group>
               </Col>
               <Col>
-                <Button  onClick={this.handleSubmit} variant="primary" type="submit">
+                <Button variant="primary" type="submit">
                   Submit
                 </Button>
               </Col>
