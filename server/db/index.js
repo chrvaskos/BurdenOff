@@ -255,4 +255,19 @@ burdenoff.getEmailUsername = () => {
   });
 };
 
+burdenoff.getMyPosts = (id) => {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      "SELECT * FROM posts WHERE user_id_fk= ?",
+      [id],
+      (err, results) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(results);
+      }
+    );
+  });
+};
+
 module.exports = burdenoff;

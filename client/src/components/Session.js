@@ -197,7 +197,7 @@ class Session extends Component {
 
 const Conv = ({ name, title, handleClick, c_id_fk ,postId}) => (
   <ListGroupItem
-    as="button"
+    as="tab"
     c_id_fk={c_id_fk}
     postId={postId}
     onClick={handleClick}

@@ -27,7 +27,11 @@ class FootBar extends Component {
                 <li>
                   <h5 className="title d-flex justify-content-start justify-content-md-end mr-2">
                     <Icon icon={twitter} size="24" className="mr-2" />
-                    <a className="mt-1" href="https://twitter.com/BurdenOff">
+                    <a
+                      className="mt-1"
+                      target="_blank"
+                      href="https://twitter.com/BurdenOff"
+                    >
                       Burden Off
                     </a>
                   </h5>
@@ -48,7 +52,7 @@ class FootBar extends Component {
               </h5>
               <ul className="px-1 ml-2">
                 <li className="list-unstyled">
-                  <a href="https://www.auth.gr/">
+                  <a href="https://www.auth.gr/" target="_blank">
                     Aristotle University <br /> of Thessaloniki
                   </a>
                 </li>

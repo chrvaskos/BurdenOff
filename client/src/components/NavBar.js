@@ -51,7 +51,7 @@ class NavBar extends Component {
                   Posts
                 </NavLink>
                 <NavLink to="/faq" className="text-light nav-link mx-1">
-                  FAAAAAAAAAAAAAAAAAAQ
+                  FAQ
                 </NavLink>
                 <NavDropdown
                   title={
@@ -90,17 +90,30 @@ class NavBar extends Component {
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav>
-              <NavLink to="/session" className="text-light nav-link mr-2">
-                Session
-              </NavLink>
               <DropdownButton
                 id="dropdown-basic-button"
                 variant="secondary"
                 title={this.state.username + " "}
                 className="px-1"
               >
-                <Dropdown.Item>English</Dropdown.Item>
-                <Dropdown.Item>Ελληνικά</Dropdown.Item>
+                <Dropdown.Item>
+                  <Link
+                    to="/session"
+                    className="text-dark"
+                    style={{ textDecoration: "none", color: "#343a40" }}
+                  >
+                    Sessions
+                  </Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link
+                    to="/myposts"
+                    className="text-dark"
+                    style={{ textDecoration: "none", color: "#343a40" }}
+                  >
+                    My Posts
+                  </Link>
+                </Dropdown.Item>
                 <Dropdown.Divider />
                 <Button
                   onClick={() => {
@@ -137,7 +150,7 @@ class NavBar extends Component {
                   Posts
                 </NavLink>
                 <NavLink to="/faq" className="text-light nav-link mx-1">
-                  FAAAAAAAAAAAAAAAAAAQ
+                  FAQ
                 </NavLink>
                 <NavDropdown
                   title={
@@ -176,20 +189,41 @@ class NavBar extends Component {
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav>
-              <NavLink to="/admin" className="text-success nav-link">
-                Admin
-              </NavLink>
-              <NavLink to="/session" className="text-light nav-link mr-2">
-                Session
-              </NavLink>
+
               <DropdownButton
                 id="dropdown-basic-button"
                 variant="secondary"
                 title={this.state.username + " "}
                 className="px-1"
               >
-                <Dropdown.Item>English</Dropdown.Item>
-                <Dropdown.Item>Ελληνικά</Dropdown.Item>
+                <Dropdown.Item>
+                  <Link
+                    to="/admin"
+                    className="text-success"
+                    style={{ textDecoration: "none", color: "#343a40" }}
+                  >
+                    Admin Page
+                  </Link>
+                </Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item>
+                  <Link
+                    to="/session"
+                    className="text-dark"
+                    style={{ textDecoration: "none", color: "#343a40" }}
+                  >
+                    Sessions
+                  </Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link
+                    to="/myposts"
+                    className="text-dark"
+                    style={{ textDecoration: "none", color: "#343a40" }}
+                  >
+                    My Posts
+                  </Link>
+                </Dropdown.Item>
                 <Dropdown.Divider />
                 <Button
                   onClick={() => {

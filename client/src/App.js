@@ -9,6 +9,7 @@ import expertJoin from "./pages/expert-join";
 import usefulLinks from "./pages/useful-links";
 import faq from "./pages/faq";
 import posts from "./pages/posts";
+import myposts from "./pages/myposts";
 import submit from "./pages/submit";
 import session from "./pages/session";
 import admin from "./pages/admin";
@@ -23,6 +24,7 @@ function App() {
       <Route path="/useful-links" component={usefulLinks} />
       <Route path="/faq" component={faq} />
       <Route path="/posts" component={posts} />
+      <Route path="/myposts" component={myposts} />
       <Route path="/submit" component={submit} />
       <Route path="/session" component={session} />
       <Route path="/admin" component={admin} />

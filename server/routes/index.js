@@ -165,6 +165,18 @@ router.get("/emailusername", async (req, res, next) => {
   }
 });
 
+router.get("/post/:id", async (req, res, next) => {
+  try {      
+    let Results = await db.getMyPosts(req.params.id);
+    let myPostArray = Array.from(Results);      
+    res.json(myPostArray);     
+        
+  } catch (e) {
+    console.log(e);
+    res.sentStatus(500);
+  }
+});
+
 
 
 
