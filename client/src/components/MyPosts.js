@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container, Button, Row, Card, ListGroup } from "react-bootstrap";
 import styled from "styled-components";
 import "../css/App.css";
+import { Redirect } from "react-router-dom";
 
 class MyPosts extends Component {
   constructor(props) {
@@ -15,35 +16,43 @@ class MyPosts extends Component {
       .then((myPostArray) => this.setState({ myPostArray }));
   }
   render() {
-    return (
-      <Container className="d-flex flex-column justify-content-center align-items-center posts-container">
-        <CenterContent>
-          <Row className="d-flex flex-row align-self-start">
-            <h3 className="my-3 mx-1" style={{ color: "#343a40" }}>
-              My Posts
-            </h3>
-          </Row>
-          <Row
-            className="d-flex flex-column align-self-start posts-wrap mb-3"
-            style={{ width: "100%" }}
-          >
-            <div>
-              {this.state.myPostArray.map((post) => (
-                <MyPostCard
-                  title={post.title}
-                  category={post.category}
-                  content={post.content}
-                  solution={post.solution}
-                  user={post.username}
-                  when={post.time}
-                  solved={post.solved}
-                />
-              ))}
-            </div>
-          </Row>
-        </CenterContent>
-      </Container>
-    );
+    if (
+      sessionStorage.getItem("role") === "1" ||
+      sessionStorage.getItem("role") === "2" ||
+      sessionStorage.getItem("role") === "3"
+    ) {
+      return (
+        <Container className="d-flex flex-column justify-content-center align-items-center posts-container">
+          <CenterContent>
+            <Row className="d-flex flex-row align-self-start">
+              <h3 className="my-3 mx-1" style={{ color: "#343a40" }}>
+                My Posts
+              </h3>
+            </Row>
+            <Row
+              className="d-flex flex-column align-self-start posts-wrap mb-3"
+              style={{ width: "100%" }}
+            >
+              <div>
+                {this.state.myPostArray.map((post) => (
+                  <MyPostCard
+                    title={post.title}
+                    category={post.category}
+                    content={post.content}
+                    solution={post.solution}
+                    user={post.username}
+                    when={post.time}
+                    solved={post.solved}
+                  />
+                ))}
+              </div>
+            </Row>
+          </CenterContent>
+        </Container>
+      );
+    } else {
+      return <Redirect to="/" />;
+    }
   }
 }
 

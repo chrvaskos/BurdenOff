@@ -10,9 +10,10 @@ import {
   Card,
 } from "react-bootstrap";
 import { Icon } from "react-icons-kit";
-import {ic_send} from 'react-icons-kit/md/ic_send'
+import { ic_send } from "react-icons-kit/md/ic_send";
 import SolvedButton from "./SolvedButton";
 import "../css/App.css";
+import { Redirect } from "react-router-dom";
 
 class Session extends Component {
   constructor() {
@@ -96,10 +97,10 @@ class Session extends Component {
     // ... submit to API o  r something
   }
   handleClick(e) {
-    console.log("eimai edw ")
+    console.log("eimai edw ");
     var btnContainer = document.getElementById("session-list");
     var btns = btnContainer.getElementsByClassName("convBtn");
-    
+
     sessionStorage.setItem("postId", e.currentTarget.getAttribute("postId"));
     for (var i = 0; i < btns.length; i++) {
       btns[i].addEventListener("click", function () {
@@ -121,81 +122,89 @@ class Session extends Component {
     if (redirect) {
       window.location.reload();
     }
-    return (
-      <Container className="mt-2 session-container">
-        <Container className="border my-4">
-          <Row className="px-lg-2 px-2 chat-row">
-            <Col md="4" xl="3" className="px-0 mb-2 mb-md-0">
-              <h3 className="font-weight-bold m-3 text-lg-left">Sessions</h3>
-              <Col className="z-depth-1 p-3">
-                <ListGroup as="ul" id="session-list" className="session-list">
-                  {this.state.convArray.map((conv) => (
-                    <Conv
-                      key={conv.c_id}
-                      name={this.getOtherName(conv.user_one, conv.user_two)}
-                      title={conv.title}
-                      handleClick={this.handleClick}
-                      c_id_fk={conv.c_id}
-                      postId={conv.post_id}
-                    />
-                  ))}
-                </ListGroup>
-              </Col>
-            </Col>
-            <Col md="8" xl="9" className="pl-md-3 px-lg-auto mt-2 mt-md-0">
-              <Col className="chat-col">
-                <Col className="inner-chat-col">
-                  <ListGroup
-                    as="ul"
-                    id="chat-room"
-                    className="list-unstyled p-3 chat-room"
-                  >
-                    {this.state.replyArray.map((reply) => (
-                      <ChatMessage
-                        author={this.getName(reply.user_id_fk)}
-                        when={reply.time}
-                        message={reply.reply}
-                        position={this.getPosition(reply.user_id_fk)}
+    if (
+      sessionStorage.getItem("role") === "1" ||
+      sessionStorage.getItem("role") === "2" ||
+      sessionStorage.getItem("role") === "3"
+    ) {
+      return (
+        <Container className="mt-2 session-container">
+          <Container className="border my-4">
+            <Row className="px-lg-2 px-2 chat-row">
+              <Col md="4" xl="3" className="px-0 mb-2 mb-md-0">
+                <h3 className="font-weight-bold m-3 text-lg-left">Sessions</h3>
+                <Col className="z-depth-1 p-3">
+                  <ListGroup as="ul" id="session-list" className="session-list">
+                    {this.state.convArray.map((conv) => (
+                      <Conv
+                        key={conv.c_id}
+                        name={this.getOtherName(conv.user_one, conv.user_two)}
+                        title={conv.title}
+                        handleClick={this.handleClick}
+                        c_id_fk={conv.c_id}
+                        postId={conv.post_id}
                       />
                     ))}
                   </ListGroup>
                 </Col>
               </Col>
-              <Form onSubmit={this.handleSubmit} className="my-3">
-                <Form.Group controlId="exampleForm.ControlTextarea1">
-                  <Form.Control
-                    onChange={this.handleMessageChange}
-                    as="textarea"
-                    rows="3"
-                    placeholder="Type your message..."
-                    required
-                  />
-                </Form.Group>
-                <Row>
-                <Col className="d-flex justify-content-start">
-                    <SolvedButton />
-                  </Col>
-                  <Col className="d-flex justify-content-end">
-                    <Button
-                      variant="primary"
-                      type="submit"
-                      className="py-2 px-3"
+              <Col md="8" xl="9" className="pl-md-3 px-lg-auto mt-2 mt-md-0">
+                <Col className="chat-col">
+                  <Col className="inner-chat-col">
+                    <ListGroup
+                      as="ul"
+                      id="chat-room"
+                      className="list-unstyled p-3 chat-room"
                     >
-                      Send
-                      <Icon icon={ic_send} size="18" className="ml-2"/>
-                    </Button>
+                      {this.state.replyArray.map((reply) => (
+                        <ChatMessage
+                          author={this.getName(reply.user_id_fk)}
+                          when={reply.time}
+                          message={reply.reply}
+                          position={this.getPosition(reply.user_id_fk)}
+                        />
+                      ))}
+                    </ListGroup>
                   </Col>
-                </Row>
-              </Form>
-            </Col>
-          </Row>
+                </Col>
+                <Form onSubmit={this.handleSubmit} className="my-3">
+                  <Form.Group controlId="exampleForm.ControlTextarea1">
+                    <Form.Control
+                      onChange={this.handleMessageChange}
+                      as="textarea"
+                      rows="3"
+                      placeholder="Type your message..."
+                      required
+                    />
+                  </Form.Group>
+                  <Row>
+                    <Col className="d-flex justify-content-start">
+                      <SolvedButton />
+                    </Col>
+                    <Col className="d-flex justify-content-end">
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        className="py-2 px-3"
+                      >
+                        Send
+                        <Icon icon={ic_send} size="18" className="ml-2" />
+                      </Button>
+                    </Col>
+                  </Row>
+                </Form>
+              </Col>
+            </Row>
+          </Container>
         </Container>
-      </Container>
-    );
+      );
+    } else {
+      return <Redirect to="/" />;
+    }
   }
 }
 
-const Conv = ({ name, title, handleClick, c_id_fk ,postId}) => (
+const Conv = ({ name, title, handleClick, c_id_fk, postId }) => (
   <ListGroupItem
     as="tab"
     c_id_fk={c_id_fk}

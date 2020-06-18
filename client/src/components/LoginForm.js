@@ -122,10 +122,7 @@ class LoginForm extends Component {
                 required
               />
             </Form.Group>
-            <Form.Group controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Remember me" />
-            </Form.Group>
-            <Button variant="primary" type="submit" style={{ width: 300 }}>
+            <Button variant="primary" type="submit" className="mt-3" style={{ width: 300 }}>
               Login
             </Button>
             <Alert variant="danger" show={this.state.visible} className="mt-2">
