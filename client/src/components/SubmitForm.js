@@ -78,7 +78,7 @@ class SubmitForm extends Component {
                   as="select"
                   required
                 >
-                  <option selected hidden>
+                  <option selected disabled hidden value="">
                     Choose Category
                   </option>
                   <option>Anxiety</option>
