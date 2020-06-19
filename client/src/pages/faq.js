@@ -9,9 +9,7 @@ class faq extends Component {
       <div className="d-flex flex-column">
         <NavBar />
         <Faq />
-        <footer className="fixed-bottom">
-          <FootBar />
-        </footer>
+        <FootBar />
       </div>
     );
   }

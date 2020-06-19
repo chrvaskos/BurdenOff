@@ -108,3 +108,14 @@
   width: 6rem;
   height: 6rem;
 }
+
+.faq-container .faq-wrap {
+  height: 60vh;
+  overflow-y: auto;
+}
+@media only screen and (max-width: 768px) {
+  .faq-container .faq-wrap {
+    height: 75vh;
+    overflow-y: auto;
+  }
+}

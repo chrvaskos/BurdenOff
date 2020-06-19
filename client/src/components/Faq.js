@@ -48,11 +48,11 @@ function Faq() {
   ];
 
   return (
-    <Container>
+    <Container className="faq-container">
       <Row className="my-4">
         <h1>FAQ</h1>
       </Row>
-      <Row className="d-flex flex-column">
+      <Row className="d-flex flex-column faq-wrap">
         <Accordion>
           {faqs.map((faq) => (
             <FaqCard
