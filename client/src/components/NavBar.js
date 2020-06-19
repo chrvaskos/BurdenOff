@@ -98,20 +98,20 @@ class NavBar extends Component {
               >
                 <Dropdown.Item>
                   <Link
-                    to="/session"
-                    className="text-dark"
-                    style={{ textDecoration: "none", color: "#343a40" }}
-                  >
-                    Sessions
-                  </Link>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <Link
                     to="/myposts"
                     className="text-dark"
                     style={{ textDecoration: "none", color: "#343a40" }}
                   >
                     My Posts
+                  </Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link
+                    to="/session"
+                    className="text-dark"
+                    style={{ textDecoration: "none", color: "#343a40" }}
+                  >
+                    Sessions
                   </Link>
                 </Dropdown.Item>
                 <Dropdown.Divider />
@@ -189,7 +189,6 @@ class NavBar extends Component {
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav>
-
               <DropdownButton
                 id="dropdown-basic-button"
                 variant="secondary"
@@ -208,20 +207,20 @@ class NavBar extends Component {
                 <Dropdown.Divider />
                 <Dropdown.Item>
                   <Link
-                    to="/session"
-                    className="text-dark"
-                    style={{ textDecoration: "none", color: "#343a40" }}
-                  >
-                    Sessions
-                  </Link>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <Link
                     to="/myposts"
                     className="text-dark"
                     style={{ textDecoration: "none", color: "#343a40" }}
                   >
                     My Posts
+                  </Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link
+                    to="/session"
+                    className="text-dark"
+                    style={{ textDecoration: "none", color: "#343a40" }}
+                  >
+                    Sessions
                   </Link>
                 </Dropdown.Item>
                 <Dropdown.Divider />
