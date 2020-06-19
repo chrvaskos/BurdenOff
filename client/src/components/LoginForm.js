@@ -45,7 +45,6 @@ class LoginForm extends Component {
           headers: {
             "Content-Type": "application/json",
           },
-          // We convert the React state to JSON and send it as the POST body
           body: JSON.stringify(this.state.passwordArray),
         })
           .then(function (res) {
@@ -74,14 +73,10 @@ class LoginForm extends Component {
       } else {
         this.state.count++;
       }
-
-      // if res == true, password matched
-      // else wrong password
     }
     if (this.state.userArray.length === this.state.count)
       this.setState({ visible: true });
     e.preventDefault();
-    // ... submit to API o  r something
   }
 
   render() {
@@ -122,7 +117,12 @@ class LoginForm extends Component {
                 required
               />
             </Form.Group>
-            <Button variant="primary" type="submit" className="mt-3" style={{ width: 300 }}>
+            <Button
+              variant="primary"
+              type="submit"
+              className="mt-3"
+              style={{ width: 300 }}
+            >
               Login
             </Button>
             <Alert variant="danger" show={this.state.visible} className="mt-2">

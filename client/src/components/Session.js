@@ -85,7 +85,6 @@ class Session extends Component {
       headers: {
         "Content-Type": "application/json",
       },
-      // We convert the React state to JSON and send it as the POST body
       body: JSON.stringify(this.state),
     }).then(
       function (res) {
@@ -94,7 +93,6 @@ class Session extends Component {
       }.bind(this)
     );
     e.preventDefault();
-    // ... submit to API o  r something
   }
   handleClick(e) {
     console.log("eimai edw ");

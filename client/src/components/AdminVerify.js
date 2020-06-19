@@ -63,7 +63,7 @@ const Expert = ({ id, username, email, expertise, bio, verified }) => (
     <td>{email}</td>
     <td>{expertise}</td>
     <td>
-      <BioModal bio={bio}/>
+      <BioModal bio={bio} />
     </td>
     <td style={{ color: verified ? "green" : "red" }}>{verified}</td>
     <td>
@@ -78,7 +78,6 @@ const Expert = ({ id, username, email, expertise, bio, verified }) => (
             headers: {
               "Content-Type": "application/json",
             },
-            // We convert the React state to JSON and send it as the POST body
             body: JSON.stringify(data),
           }).then(
             function (res) {
