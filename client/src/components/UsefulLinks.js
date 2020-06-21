@@ -8,9 +8,9 @@ class UsefulLinks extends Component {
         <Row className="d-flex flex-column">
           <h1 className="text-uppercase my-2">Useful Links</h1>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. <br /> At
-            facere illum quis natus fugiat libero, <br /> ut porro aliquid unde
-            atque iusto ducimus
+            In case you or a loved one has a more serious problem, we advise you
+            to seek help as soon as possible. <br /> Below we provide some
+            useful sites and telephone numbers of various organizations.
           </p>
         </Row>
         <Row className="d-flex flex-column" id="sites">

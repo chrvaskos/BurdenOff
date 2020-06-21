@@ -41,6 +41,7 @@ class NavBar extends Component {
                   src={require("../images/logo-light.png")}
                   roundedCircle
                   className="nav-logo-image"
+                  alt="Website Logo"
                 />
               </Navbar.Brand>
             </Link>
@@ -140,6 +141,7 @@ class NavBar extends Component {
                   src={require("../images/logo-light.png")}
                   roundedCircle
                   className="nav-logo-image"
+                  alt="Website Logo"
                 />
               </Navbar.Brand>
             </Link>
@@ -249,6 +251,7 @@ class NavBar extends Component {
                   src={require("../images/logo-light.png")}
                   roundedCircle
                   className="nav-logo-image mb-1"
+                  alt="Website Logo"
                 />
               </Navbar.Brand>
             </Link>

@@ -92,6 +92,7 @@ class LoginForm extends Component {
               src={require("../images/logo-dark.png")}
               roundedCircle
               className="login-logo-image"
+              alt="Website Logo"
             />
           </h1>
           <Form

@@ -31,6 +31,7 @@ class Jumbotrons extends Component {
               src={require("../images/quill.jpg")}
               roundedCircle
               className="imageStyle mb-2"
+              alt="Image of a quill"
             />
           </Col>
         </StyledRow>
@@ -63,6 +64,7 @@ class Jumbotrons extends Component {
               src={require("../images/star.jpg")}
               roundedCircle
               className="imageStyle my-2"
+              alt="Image representing people working together"
             />
           </Col>
         </StyledRow>

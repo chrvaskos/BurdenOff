@@ -44,6 +44,7 @@ class FootBar extends Component {
                 src={require("../images/logo-light.png")}
                 roundedCircle
                 className="footer-logo-image"
+                alt="Website Logo"
               />
             </Col>
             <Col xs="12" md="5">
