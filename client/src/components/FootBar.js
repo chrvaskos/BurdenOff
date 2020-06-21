@@ -31,6 +31,7 @@ class FootBar extends Component {
                       className="mt-1"
                       target="_blank"
                       href="https://twitter.com/BurdenOff"
+                      rel="noopener noreferrer"
                     >
                       Burden Off
                     </a>
@@ -52,7 +53,11 @@ class FootBar extends Component {
               </h5>
               <ul className="px-1 ml-2">
                 <li className="list-unstyled">
-                  <a href="https://www.auth.gr/" target="_blank">
+                  <a
+                    href="https://www.auth.gr/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Aristotle University <br /> of Thessaloniki
                   </a>
                 </li>

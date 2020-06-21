@@ -71,14 +71,11 @@ class Post extends Component {
       }.bind(this)
     );
     e.preventDefault();
-
-    // ... submit to API o  r something
   }
 
 
   handleDelete(e){
-    this.state.id = e.target.getAttribute("id");    
-    console.log(e.target.getAttribute("id"))
+    this.state.id = e.target.getAttribute("id");   
     var data={
       id:this.state.id
     }

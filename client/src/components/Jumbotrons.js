@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Jumbotron, Button, Col, Row, Image } from "react-bootstrap";
+import { Container, Jumbotron, Button, Col, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 

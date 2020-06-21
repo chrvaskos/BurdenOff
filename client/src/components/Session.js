@@ -94,8 +94,7 @@ class Session extends Component {
     );
     e.preventDefault();
   }
-  handleClick(e) {
-    console.log("eimai edw ");
+  handleClick(e) {    
     var btnContainer = document.getElementById("session-list");
     var btns = btnContainer.getElementsByClassName("convBtn");
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Button, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import Post from "./Post";
 import PostMenu from "./PostMenu";
 import CreatePost from "./CreatePost";

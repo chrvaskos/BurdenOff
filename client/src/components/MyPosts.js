@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Button, Row, Card, ListGroup } from "react-bootstrap";
+import { Container, Row, Card, ListGroup } from "react-bootstrap";
 import styled from "styled-components";
 import "../css/App.css";
 import { Redirect } from "react-router-dom";

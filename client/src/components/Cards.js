@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Card, Col, Row } from "react-bootstrap";
+import { Container, Card, Col } from "react-bootstrap";
 import { Icon } from "react-icons-kit";
 import { lock } from "react-icons-kit/fa/lock";
 import { university } from "react-icons-kit/fa/university";

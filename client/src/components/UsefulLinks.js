@@ -17,7 +17,11 @@ class UsefulLinks extends Component {
           <h3 className="text-uppercase my-2">Useful Sites</h3>
           <ul className="list-unstyled">
             <li>
-              <a href="http://kesypsy.web.auth.gr/" target="_blank">
+              <a
+                href="http://kesypsy.web.auth.gr/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <h6>ΚΕ.ΣΥ.Ψ.Υ.</h6>
               </a>
               <p>
@@ -36,7 +40,11 @@ class UsefulLinks extends Component {
               </p>
             </li>
             <li>
-              <a href="https://www.hamogelo.gr/gr/el/home/" target="_blank">
+              <a
+                href="https://www.hamogelo.gr/gr/el/home/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <h6>ΤΟ ΧΑΜΟΓΕΛΟ ΤΟΥ ΠΑΙΔΙΟΥ</h6>
               </a>
               <p>
@@ -48,7 +56,11 @@ class UsefulLinks extends Component {
               </p>
             </li>
             <li>
-              <a href="https://www.kethea.gr/" target="_blank">
+              <a
+                href="https://www.kethea.gr/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <h6>ΚΕΘΕΑ</h6>
               </a>
               <p>
@@ -57,7 +69,11 @@ class UsefulLinks extends Component {
               </p>
             </li>
             <li>
-              <a href="https://eody.gov.gr/" target="_blank">
+              <a
+                href="https://eody.gov.gr/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <h6>Εθνικός Οργανισμός Δημόσιας Υγείας</h6>
               </a>
               <p>
@@ -73,7 +89,11 @@ class UsefulLinks extends Component {
               </p>
             </li>
             <li>
-              <a href="https://www.hamogelo.gr/gr/el/home/" target="_blank">
+              <a
+                href="https://www.hamogelo.gr/gr/el/home/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <h6>
                   Κορωνοϊός (COVID-19): Οδηγίες Ψυχολογικής Υποστήριξης των
                   Πολιτών
@@ -88,7 +108,11 @@ class UsefulLinks extends Component {
               </p>
             </li>
             <li>
-              <a href="https://www.okana.gr/" target="_blank">
+              <a
+                href="https://www.okana.gr/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <h6>ΟΚΑΝΑ</h6>
               </a>
               <p>
@@ -98,7 +122,11 @@ class UsefulLinks extends Component {
               </p>
             </li>
             <li>
-              <a href="http://suicide-help.gr/" target="_blank">
+              <a
+                href="http://suicide-help.gr/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <h6>Κλίμακα</h6>
               </a>
               <p>Κέντρο Ημέρας για την Πρόληψη της Αυτοκτονίας</p>
