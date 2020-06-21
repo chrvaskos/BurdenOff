@@ -95,18 +95,24 @@
 }
 
 .footer-container .footer-logo-image {
-  width: 6rem;
-  height: 6rem;
+  width: 7.5rem;
+  height: 7.5rem;
+  padding: 10px;
+  border: 2px solid gray;
+  box-shadow: 0 0 6px gray;
 }
 
 .nav-container .nav-logo-image {
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
 .login-container .login-logo-image {
-  width: 6rem;
-  height: 6rem;
+  width: 8rem;
+  height: 8rem;
+  padding: 10px;
+  border: 2px solid gray;
+  box-shadow: 0 0 6px gray;
 }
 
 .faq-container .faq-wrap {

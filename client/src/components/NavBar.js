@@ -38,7 +38,7 @@ class NavBar extends Component {
             <Link to="/">
               <Navbar.Brand>
                 <Image
-                  src={require("../images/twitterlogo.png")}
+                  src={require("../images/logo-light.png")}
                   roundedCircle
                   className="nav-logo-image"
                 />
@@ -137,7 +137,7 @@ class NavBar extends Component {
             <Link to="/">
               <Navbar.Brand>
                 <Image
-                  src={require("../images/twitterlogo.png")}
+                  src={require("../images/logo-light.png")}
                   roundedCircle
                   className="nav-logo-image"
                 />
@@ -246,9 +246,9 @@ class NavBar extends Component {
             <Link to="/">
               <Navbar.Brand>
                 <Image
-                  src={require("../images/twitterlogo.png")}
+                  src={require("../images/logo-light.png")}
                   roundedCircle
-                  className="nav-logo-image"
+                  className="nav-logo-image mb-1"
                 />
               </Navbar.Brand>
             </Link>

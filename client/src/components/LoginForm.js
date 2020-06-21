@@ -89,7 +89,7 @@ class LoginForm extends Component {
         <Container className="d-flex flex-column my-3 login-container">
           <h1 className="align-self-center mb-5">
             <Image
-              src={require("../images/twitterlogo.png")}
+              src={require("../images/logo-dark.png")}
               roundedCircle
               className="login-logo-image"
             />

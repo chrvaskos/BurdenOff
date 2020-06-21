@@ -40,7 +40,7 @@ class FootBar extends Component {
             </Col>
             <Col md="2" className="d-flex justify-content-center">
               <Image
-                src={require("../images/twitterlogo.png")}
+                src={require("../images/logo-light.png")}
                 roundedCircle
                 className="footer-logo-image"
               />
