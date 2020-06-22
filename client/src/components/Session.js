@@ -94,7 +94,7 @@ class Session extends Component {
     );
     e.preventDefault();
   }
-  handleClick(e) {    
+  handleClick(e) {
     var btnContainer = document.getElementById("session-list");
     var btns = btnContainer.getElementsByClassName("convBtn");
 
@@ -174,11 +174,8 @@ class Session extends Component {
                       required
                     />
                   </Form.Group>
-                  <Row>
-                    <Col className="d-flex justify-content-start">
-                      <SolvedButton />
-                    </Col>
-                    <Col className="d-flex justify-content-end">
+                  <Row className="d-flex justify-content-end">
+                    <div className="d-block mr-3">
                       <Button
                         variant="primary"
                         type="submit"
@@ -187,9 +184,12 @@ class Session extends Component {
                         Send
                         <Icon icon={ic_send} size="18" className="ml-2" />
                       </Button>
-                    </Col>
+                    </div>
                   </Row>
                 </Form>
+                <div className="d-block solved-button">
+                  <SolvedButton />
+                </div>
               </Col>
             </Row>
           </Container>

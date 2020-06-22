@@ -125,3 +125,8 @@
     overflow-y: auto;
   }
 }
+
+.session-container .solved-button {
+  margin-top: -55px;
+  margin-bottom: 8px;
+}
