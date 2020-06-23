@@ -8,13 +8,6 @@ const pool = mysql.createPool({
   host: "localhost",
   port: "3306",
 });
-var config = {
-  password: "123",
-  user: "me",
-  database: "burdenoff",
-  host: "localhost",
-  port: "3306",
-};
 
 let burdenoff = {};
 
