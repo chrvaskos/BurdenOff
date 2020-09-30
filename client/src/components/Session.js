@@ -119,8 +119,76 @@ class Session extends Component {
     if (redirect) {
       window.location.reload();
     }
-    if (
-      sessionStorage.getItem("role") === "1" ||
+    if (sessionStorage.getItem("role") === "1") {
+      return (
+        <Container className="mt-2 session-container">
+          <Container className="border my-4">
+            <Row className="px-lg-2 px-2 chat-row">
+              <Col md="4" xl="3" className="px-0 mb-2 mb-md-0">
+                <h3 className="font-weight-bold m-3 text-lg-left">Sessions</h3>
+                <Col className="z-depth-1 p-3">
+                  <ListGroup as="ul" id="session-list" className="session-list">
+                    {this.state.convArray.map((conv) => (
+                      <Conv
+                        key={conv.c_id}
+                        name={this.getOtherName(conv.user_one, conv.user_two)}
+                        title={conv.title}
+                        handleClick={this.handleClick}
+                        c_id_fk={conv.c_id}
+                        postId={conv.post_id}
+                      />
+                    ))}
+                  </ListGroup>
+                </Col>
+              </Col>
+              <Col md="8" xl="9" className="pl-md-3 px-lg-auto mt-2 mt-md-0">
+                <Col className="chat-col">
+                  <Col className="inner-chat-col">
+                    <ListGroup
+                      as="ul"
+                      id="chat-room"
+                      className="list-unstyled p-3 chat-room"
+                    >
+                      {this.state.replyArray.map((reply) => (
+                        <ChatMessage
+                          author={this.getName(reply.user_id_fk)}
+                          when={reply.time}
+                          message={reply.reply}
+                          position={this.getPosition(reply.user_id_fk)}
+                        />
+                      ))}
+                    </ListGroup>
+                  </Col>
+                </Col>
+                <Form onSubmit={this.handleSubmit} className="my-3">
+                  <Form.Group controlId="exampleForm.ControlTextarea1">
+                    <Form.Control
+                      onChange={this.handleMessageChange}
+                      as="textarea"
+                      rows="3"
+                      placeholder="Type your message..."
+                      required
+                    />
+                  </Form.Group>
+                  <Row className="d-flex justify-content-end">
+                    <div className="d-block mr-3">
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        className="py-2 px-3"
+                      >
+                        Send
+                        <Icon icon={ic_send} size="18" className="ml-2" />
+                      </Button>
+                    </div>
+                  </Row>
+                </Form>
+              </Col>
+            </Row>
+          </Container>
+        </Container>
+      );
+    } else if (
       sessionStorage.getItem("role") === "2" ||
       sessionStorage.getItem("role") === "3"
     ) {
