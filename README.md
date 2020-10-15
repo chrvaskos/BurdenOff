@@ -5,3 +5,6 @@ The proccess is simple; create an account post your problem and wait. An expert 
 
 Technical Details: 
 In order to create this website we mainly used React and bootsrap for the front-end and Express for the back-end and the connection with our SQL database. For the safe storage of passwords within the database we used the npm library Bcrypt. 
+
+
+This project was made by four proud undergraduate students of the Aristotle University of Thessaloniki; Vasilis Christoforidis,Sotirios Karbounis,Dimitrios Kostakis, Giannis Kostakis  and under the guidance of their professor ; Ms. Athina Vakali.
