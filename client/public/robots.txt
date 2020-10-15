@@ -1,0 +1,10 @@
+# robots.txt file for BurdenOff
+
+User-agent: *
+Disallow: /admin
+Disallow: /myposts
+Disallow: /session
+Disallow: /submit
+
+#Example sitemap below
+#Sitemap: [sitemap.xml location]
